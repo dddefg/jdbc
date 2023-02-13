@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dk.jdbc.mapper.GoodsMapper">
+    <!-- mapper接口类名和映射文件的类名保持一致
+         mapper接口的方法名要和映射文件sql的ID保持一致
+         void addPurchase(Goods goods);
+          private Integer goodsId; //商品编号
+    private String goodsName; //商品名
+    private String category; //商品类别
+    private double price;  //单价
+    private double num;  //数量
+    private String unit;  //价格单位
+    private double cost;  //总计
+    private Date date;    //进货日期
+     -->
+    <insert id="addPurchase" parameterType="com.dk.jdbc.pojo.Goods">
+        INSERT INTO goods (order_id,supplier_name,goods_id,goods_name,category,price,num,unit,cost,date)
+        VALUES (#{orderId},#{supplierName},#{goodsId}, #{goodsName},#{category}, #{price}, #{num}, #{unit}, #{cost},#{date});
+    </insert>
+
+<!--  无用查询，留做模板  getCategory-->
+    <select id="getCategory" resultType="String">
+        SELECT DISTINCT category FROM goods
+
+    </select>
+
+
+    <select id="getListGoods" resultType="com.dk.jdbc.pojo.Goods">
+        select * from goods where 1=1
+        <if test="orderId !='' and orderId !=null">
+           and order_id = #{orderId}
+        </if>
+        <if test="supplierName !='' and supplierName !=null">
+            and supplier_name = #{supplierName}
+        </if>
+        <if test="goodsName !='' and goodsName !=null">
+            and goods_name = #{goodsName}
+        </if>
+        <if test="category !='' and category !=null">
+            and category = #{category}
+        </if>
+        <if test="date !='' and date !=null">
+            and date = #{date}
+        </if>
+        ORDER BY date DESC
+    </select>
+    <select id="getMoney" resultType="java.lang.Double">
+        SELECT SUM(cost) FROM goods WHERE date = #{date}
+    </select>
+    <select id="getGoodsCurve" resultType="com.dk.jdbc.pojo.Goods">
+        SELECT
+        date,sum(`num`) AS num
+        FROM
+        goods
+        WHERE
+        DATE_SUB(CURDATE(), INTERVAL 10 DAY) <![CDATA[<=]]> date(date)
+        GROUP BY
+        date;
+
+    </select>
+
+</mapper>

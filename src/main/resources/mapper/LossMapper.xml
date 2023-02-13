@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dk.jdbc.mapper.LossMapper">
+    <!-- mapper接口类名和映射文件的类名保持一致
+         mapper接口的方法名要和映射文件sql的ID保持一致
+     -->
+    <insert id="addLoss" parameterType="com.dk.jdbc.pojo.Loss">
+        INSERT INTO `loss` (goods_id,goods_name,category,num,filed_by,unit,date)
+        VALUES (#{goodsId},#{goodsName},#{category},#{num},#{filedBy},#{unit},#{date});
+ </insert>
+</mapper>

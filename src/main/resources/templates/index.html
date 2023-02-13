@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="keywords" content="admin, dashboard, bootstrap, template, flat, modern, theme, responsive, fluid, retina, backend, html5, css, css3">
+  <meta name="description" content="">
+  <meta name="author" content="ThemeBucket">
+  <link rel="shortcut icon" href="#" type="image/png">
+
+  <title>AdminEx 高端自适应后台系统管理界面html源码模板 - </title>
+
+  <!--icheck-->
+  <link href="js/iCheck/skins/minimal/minimal.css" rel="stylesheet">
+  <link href="js/iCheck/skins/square/square.css" rel="stylesheet">
+  <link href="js/iCheck/skins/square/red.css" rel="stylesheet">
+  <link href="js/iCheck/skins/square/blue.css" rel="stylesheet">
+
+  <!--dashboard calendar-->
+  <link href="css/clndr.css" rel="stylesheet">
+
+  <!--Morris Chart CSS -->
+  <link rel="stylesheet" href="js/morris-chart/morris.css">
+
+  <!--common-->
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/style-responsive.css" rel="stylesheet">
+
+
+
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="js/html5shiv.js"></script>
+  <script src="js/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body class="sticky-header">
+
+<section>
+    <!-- left side start-->
+    <div class="left-side sticky-left-side">
+
+        <!--logo and iconic logo start-->
+        <div class="logo">
+            <a href="index.html"><img src="images/logo.png" alt=""></a>
+        </div>
+
+        <div class="logo-icon text-center">
+            <a href="index.html"><img src="images/logo_icon.png" alt=""></a>
+        </div>
+        <!--logo and iconic logo end-->
+
+        <div class="left-side-inner">
+
+            <!-- visible to small devices only -->
+            <div class="visible-xs hidden-sm hidden-md hidden-lg">
+                <div class="media logged-user">
+                    <img alt="" src="images/photos/user-avatar.png" class="media-object">
+                    <div class="media-body">
+                        <h4><a href="#">John Doe</a></h4>
+                        <span>"Hello There..."</span>
+                    </div>
+                </div>
+
+                <h5 class="left-nav-title">Account Information</h5>
+                <ul class="nav nav-pills nav-stacked custom-nav">
+                  <li><a href="#"><i class="fa fa-user"></i> <span>Profile</span></a></li>
+                  <li><a href="#"><i class="fa fa-cog"></i> <span>Settings</span></a></li>
+                  <li><a href="#"><i class="fa fa-sign-out"></i> <span>Sign Out</span></a></li>
+                </ul>
+            </div>
+
+            <!--sidebar nav start-->
+            <ul class="nav nav-pills nav-stacked custom-nav">
+                <li class="active"><a href="index.html"><i class="fa fa-home"></i> <span>主页</span></a></li>
+                <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>Layouts</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href="blank_page.html"> Blank Page</a></li>
+                        <li><a href="boxed_view.html"> Boxed Page</a></li>
+                        <li><a href="leftmenu_collapsed_view.html"> Sidebar Collapsed</a></li>
+                        <li><a href="horizontal_menu.html"> Horizontal Menu</a></li>
+
+                    </ul>
+                </li>
+                <li class="menu-list"><a href=""><i class="fa fa-book"></i> <span>UI Elements</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href="general.html"> General</a></li>
+                        <li><a href="buttons.html"> Buttons</a></li>
+                        <li><a href="tabs-accordions.html"> Tabs & Accordions</a></li>
+                        <li><a href="typography.html"> Typography</a></li>
+                        <li><a href="slider.html"> Slider</a></li>
+                        <li><a href="panels.html"> Panels</a></li>
+                    </ul>
+                </li>
+                <li class="menu-list"><a href=""><i class="fa fa-cogs"></i> <span>Components</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href="grids.html"> Grids</a></li>
+                        <li><a href="gallery.html"> Media Gallery</a></li>
+                        <li><a href="calendar.html"> Calendar</a></li>
+                        <li><a href="tree_view.html"> Tree View</a></li>
+                        <li><a href="nestable.html"> Nestable</a></li>
+
+                    </ul>
+                </li>
+
+                <li><a href="fontawesome.html"><i class="fa fa-bullhorn"></i> <span>Fontawesome</span></a></li>
+
+                <li class="menu-list"><a href=""><i class="fa fa-envelope"></i> <span>Mail</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href="mail.html"> Inbox</a></li>
+                        <li><a href="mail_compose.html"> Compose Mail</a></li>
+                        <li><a href="mail_view.html"> View Mail</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-list"><a href=""><i class="fa fa-tasks"></i> <span>商品管理</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a th:href="@{/ToGoodsInStock}"> 商品入库记录</a></li>
+                        <li><a th:href="@{/ToCommodityManagement}"> 商品入库</a></li>
+                        <li><a th:href="@{/ToGoodsIssue}"> 商品出库</a></li>
+                        <li><a th:href="@{/ToGoodsReturn}"> 商品退货</a></li>
+                        <li><a th:href="@{/ToGoodsLoss}"> 商品损耗报备</a></li>
+                        <li><a th:href="@{/ToBasicInformation}">商品基本信息</a></li>                     </ul>
+                </li>
+                <li class="menu-list"><a href=""><i class="fa fa-bar-chart-o"></i> <span>Charts</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href="flot_chart.html"> Flot Charts</a></li>
+                        <li><a href="morris.html"> Morris Charts</a></li>
+                        <li><a href="chartjs.html"> Chartjs</a></li>
+                        <li><a href="c3chart.html"> C3 Charts</a></li>
+                    </ul>
+                </li>
+                <li class="menu-list"><a href="#"><i class="fa fa-th-list"></i> <span>Data Tables</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href="basic_table.html"> Basic Table</a></li>
+                        <li><a href="dynamic_table.html"> Advanced Table</a></li>
+                        <li><a href="responsive_table.html"> Responsive Table</a></li>
+                        <li><a href="editable_table.html"> Edit Table</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-list"><a href="#"><i class="fa fa-map-marker"></i> <span>Maps</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href="google_map.html"> Google Map</a></li>
+                        <li><a href="vector_map.html"> Vector Map</a></li>
+                    </ul>
+                </li>
+                <li class="menu-list"><a href=""><i class="fa fa-file-text"></i> <span>Extra Pages</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href="profile.html"> Profile</a></li>
+                        <li><a href="invoice.html"> Invoice</a></li>
+                        <li><a href="pricing_table.html"> Pricing Table</a></li>
+                        <li><a href="timeline.html"> Timeline</a></li>
+                        <li><a href="blog_list.html"> Blog List</a></li>
+                        <li><a href="blog_details.html"> Blog Details</a></li>
+                        <li><a href="directory.html"> Directory </a></li>
+                        <li><a href="chat.html"> Chat </a></li>
+                        <li><a href="404.html"> 404 Error</a></li>
+                        <li><a href="500.html"> 500 Error</a></li>
+                        <li><a href="registration.html"> Registration Page</a></li>
+                        <li><a href="lock_screen.html"> Lockscreen </a></li>
+                    </ul>
+                </li>
+                <li><a href="login.html"><i class="fa fa-sign-in"></i> <span>Login Page</span></a></li>
+
+            </ul>
+            <!--sidebar nav end-->
+
+        </div>
+    </div>
+    <!-- left side end-->
+    
+    <!-- main content start-->
+    <div class="main-content" >
+
+        <div th:replace="common :: #header"></div>
+
+        <!-- page heading start-->
+        <div class="page-heading">
+            <h3>
+                主页信息
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a >库存管理系统</a>
+                </li>
+                <li class="active"> 主页 </li>
+            </ul>
+            <div class="state-info">
+                <section class="panel">
+                    <div class="panel-body">
+                        <div class="summary">
+                            <span>今日出库金额</span>
+                            <h3 class="red-txt">￥ [[${issueMoney}]]</h3>
+                        </div>
+                    </div>
+                </section>
+                <section class="panel">
+                    <div class="panel-body">
+                        <div class="summary">
+                            <span>今日入库金额</span>
+                            <h3 class="green-txt">￥ [[${goodsMoney}]]</h3>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <!-- page heading end-->
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-md-6">
+                    <!--statistics start-->
+                    <div class="row state-overview">
+                        <div class="col-md-6 col-xs-12 col-sm-6">
+                            <div class="panel purple">
+                                <div class="symbol">
+                                    <i class="fa fa-gavel"></i>
+                                </div>
+                                <div class="state-value">
+                                    <div class="value">[[${unsalableNum}]]</div>
+                                    <div class="title">滞销商品种量</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-12 col-sm-6">
+                            <div class="panel red">
+                                <div class="symbol">
+                                    <i class="fa fa-tags"></i>
+                                </div>
+                                <div class="state-value">
+                                    <div class="value">[[${stockLess}]]</div>
+                                    <div class="title">库存不足商品</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row state-overview">
+                        <div class="col-md-6 col-xs-12 col-sm-6">
+                            <div class="panel blue">
+                                <div class="symbol">
+                                    <i class="fa fa-money"></i>
+                                </div>
+                                <div class="state-value">
+                                    <div class="value">[[${day}]]</div>
+                                    <div class="title"> 本周热卖商品</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-12 col-sm-6">
+                            <div class="panel green">
+                                <div class="symbol">
+                                    <i class="fa fa-eye"></i>
+                                </div>
+                                <div class="state-value">
+                                    <div class="value">[[${day30}]]</div>
+                                    <div class="title"> 本月热卖商品</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--statistics end-->
+                </div>
+                <div class="col-md-6">
+                    <!--more statistics box start-->
+                    <div class="panel deep-purple-box">
+                        <div class="panel-body">
+                            <div class="row">
+<!--                                <div style="width: 100%;height: 220px;"></div>-->
+                                <div class="col-md-7 col-sm-7 col-xs-7">
+                                    <div id="graph-donut" class="revenue-graph"></div>
+                                </div>
+                                <div class="col-md-5 col-sm-5 col-xs-5">
+                                    <ul class="bar-legend">
+                                        <li><span class="blue"></span> 入库量</li>
+                                        <li><span class="green"></span> 出库量</li>
+                                        <li><span class="purple"></span> 退货量</li>
+                                        <li><span class="red"></span> 损耗量</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--more statistics box end-->
+                </div>
+            </div>
+            <div class="row" >
+<!--出入库趋势图-->
+                <div class="col-md-8">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class="row revenue-states">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <h4>出入库趋势图</h4>
+                                </div>
+<!--                                <div class="col-md-6 col-sm-6 col-xs-12">-->
+<!--                                    <ul class="revenue-nav">-->
+<!--                                        <li ><a href="#">日</a></li>-->
+<!--                                        <li ><a href="#">周</a></li>-->
+<!--                                        <li ><a href="#">月</a></li>-->
+<!--                                    </ul>-->
+<!--                                </div>-->
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+
+
+                                    <div id="main-chart">
+                                        <div id="main-chart-container" class="main-chart">
+                                        </div>
+                                    </div>
+                                    <div style="width: 100%;height: 30px">
+                                    <ul class="revenue-short-info">
+                                        <li style="width: 88%">
+                                            <p>起：[[${dateCurve}]]</p>
+                                        </li>
+                                        <li style="width: 100px">
+                                            <p>末：[[${dateCurveTo}]]</p>
+                                        </li>
+                                    </ul>
+                                    </div>
+                                    <ul class="revenue-short-info">
+                                        <li style="width: 60px"><h1 class="red"></h1></li>
+                                        <li style="width: 60%">
+                                            <h1 class="red">出库量</h1>
+                                            <p>Outbound</p>
+                                        </li>
+                                        <li>
+                                            <h1 class="blue">入库量</h1>
+                                            <p>Warehousing</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<!--                销售额排行-->
+                <div class="col-md-4">
+                    <div class="panel">
+                        <header class="panel-heading">
+                            30天内销售额度前五
+                            <span class="tools pull-right">
+                                <a href="javascript:;" class="fa fa-chevron-down"></a>
+                                <a href="javascript:;" class="fa fa-times"></a>
+                             </span>
+                        </header>
+                        <div class="panel-body">
+                            <ul class="goal-progress">
+                                <li>
+                                    <div class="prog-avatar">
+                                        <h4>[[${RankingName0}]]</h4>
+                                    </div>
+                                    <div class="details">
+                                        <div class="title">
+                                            [[${RankingCost0}]] ￥
+                                        </div>
+                                        <div class="progress progress-xs">
+                                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" th:style="'width:' + ${RankingNum0}+'%'">
+                                                <span class="">[[${RankingNum0}]] %</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="prog-avatar">
+                                        <h4>[[${RankingName1}]]</h4>
+                                    </div>
+                                    <div class="details">
+                                        <div class="title">
+                                            [[${RankingCost1}]] ￥
+                                        </div>
+                                        <div class="progress progress-xs">
+                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" th:style="'width:' + ${RankingNum1}+'%'">
+                                                <span class="">[[${RankingNum1}]] %</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="prog-avatar">
+                                        <h4>[[${RankingName2}]]</h4>
+                                    </div>
+                                    <div class="details">
+                                        <div class="title">
+                                            [[${RankingCost2}]] ￥
+                                        </div>
+                                        <div class="progress progress-xs">
+                                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" th:style="'width:' + ${RankingNum2}+'%'">
+                                                <span class="">[[${RankingNum2}]] %</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="prog-avatar">
+                                        <h4>[[${RankingName3}]]</h4>
+                                    </div>
+                                    <div class="details">
+                                        <div class="title">
+                                            [[${RankingCost3}]] ￥
+                                        </div>
+                                        <div class="progress progress-xs">
+                                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" th:style="'width:' + ${RankingNum3}+'%'">
+                                                <span class="">[[${RankingNum3}]] %</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="prog-avatar">
+                                        <h4>[[${RankingName4}]]</h4>
+                                    </div>
+                                    <div class="details">
+                                        <div class="title">
+                                            [[${RankingCost4}]] ￥
+                                        </div>
+                                        <div class="progress progress-xs">
+                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" th:style="'width:' + ${RankingNum4}+'%'">
+                                                <span class="">[[${RankingNum4}]] %</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="text-center"><a href="#">View all Goals</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--body wrapper end-->
+
+        <!--footer section start-->
+        <footer>
+            2022 &copy; 板凳宽宽毕设作品 </a>
+        </footer>
+        <!--footer section end-->
+
+
+    </div>
+    <!-- main content end-->
+</section>
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="js/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/modernizr.min.js"></script>
+<script src="js/jquery.nicescroll.js"></script>
+
+<!--easy pie chart-->
+<script src="js/easypiechart/jquery.easypiechart.js"></script>
+<script src="js/easypiechart/easypiechart-init.js"></script>
+
+<!--Sparkline Chart-->
+<script src="js/sparkline/jquery.sparkline.js"></script>
+<script src="js/sparkline/sparkline-init.js"></script>
+
+<!--icheck -->
+<script src="js/iCheck/jquery.icheck.js"></script>
+<script src="js/icheck-init.js"></script>
+
+<!-- jQuery Flot Chart-->
+<script src="js/flot-chart/jquery.flot.js"></script>
+<script src="js/flot-chart/jquery.flot.tooltip.js"></script>
+<script src="js/flot-chart/jquery.flot.resize.js"></script>
+
+
+<!--Morris Chart-->
+<script src="js/morris-chart/morris.js"></script>
+<script src="js/morris-chart/raphael-min.js"></script>
+
+<!--Calendar-->
+<script src="js/calendar/clndr.js"></script>
+<script src="js/calendar/evnt.calendar.init.js"></script>
+<script src="js/calendar/moment-2.2.1.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+
+<!--common scripts for all pages-->
+<script src="js/scripts.js"></script>
+
+<!--Dashboard Charts-->
+<!--<script src="js/dashboard-chart-init.js"></script>-->
+
+<script>
+
+    Morris.Donut({
+        element: 'graph-donut',
+        data: [
+            {value: [[${num0}]], label: '近30天入库占比', formatted: '[[${proportion0}]]' },
+            {value: [[${num1}]], label: '近30天出库占比', formatted: '[[${proportion1}]]' },
+            {value: [[${num2}]], label: '近30天退货占比', formatted: '[[${proportion2}]]' },
+            {value: [[${num3}]], label: '近30天损耗占比', formatted: '[[${proportion3}]]' }
+        ],
+        backgroundColor: false,
+        labelColor: '#fff',
+        colors: [
+            '#4acacb','#6a8bc0','#5ab6df','#fe8676'
+        ],
+        formatter: function (x, data) { return data.formatted; }
+    });
+
+
+    $(function() {
+
+        var d1 = [
+            [0, [[${goodsCurveNum0}]]],
+            [1, [[${goodsCurveNum1}]]],
+            [2, [[${goodsCurveNum2}]]],
+            [3, [[${goodsCurveNum3}]]],
+            [4, [[${goodsCurveNum4}]]],
+            [5, [[${goodsCurveNum5}]]],
+            [6, [[${goodsCurveNum6}]]],
+            [7, [[${goodsCurveNum7}]]],
+            [8, [[${goodsCurveNum8}]]],
+            [9, [[${goodsCurveNum9}]]],
+            [10, [[${goodsCurveNum10}]]]
+
+        ];
+        var d2 = [
+            [0, [[${issueCurveNum0}]]],
+            [1, [[${issueCurveNum1}]]],
+            [2, [[${issueCurveNum2}]]],
+            [3, [[${issueCurveNum3}]]],
+            [4, [[${issueCurveNum4}]]],
+            [5, [[${issueCurveNum5}]]],
+            [6, [[${issueCurveNum6}]]],
+            [7, [[${issueCurveNum7}]]],
+            [8, [[${issueCurveNum8}]]],
+            [9, [[${issueCurveNum9}]]],
+            [10, [[${issueCurveNum10}]]]
+        ];
+
+        var data = ([{
+            label: "New Visitors",
+            data: d1,
+            lines: {
+                show: true,
+                fill: true,
+                fillColor: {
+                    colors: ["rgba(255,255,255,.4)", "rgba(183,236,240,.4)"]
+                }
+            }
+        },
+            {
+                label: "Unique Visitors",
+                data: d2,
+                lines: {
+                    show: true,
+                    fill: true,
+                    fillColor: {
+                        colors: ["rgba(255,255,255,.0)", "rgba(253,96,91,.7)"]
+                    }
+                }
+            }
+        ]);
+
+        var options = {
+            grid: {
+                backgroundColor:
+                    {
+                        colors: ["#ffffff", "#f4f4f6"]
+                    },
+                hoverable: true,
+                clickable: true,
+                tickColor: "#eeeeee",
+                borderWidth: 1,
+                borderColor: "#eeeeee"
+            },
+            // Tooltip
+            tooltip: true,
+            tooltipOpts: {
+                content: "%s X: %x Y: %y",
+                shifts: {
+                    x: -60,
+                    y: 25
+                },
+                defaultTheme: false
+            },
+            legend: {
+                labelBoxBorderColor: "#000000",
+                container: $("#main-chart-legend"), //remove to show in the chart
+                noColumns: 0
+            },
+            series: {
+                stack: true,
+                shadowSize: 0,
+                highlightColor: 'rgba(000,000,000,.2)'
+            },
+
+            points: {
+                show: true,
+                radius: 3,
+                symbol: "circle"
+            },
+            colors: ["#5abcdf", "#ff8673"]
+        };
+        var plot = $.plot($("#main-chart #main-chart-container"), data, options);
+    });
+
+</script>
+</body>
+</html>

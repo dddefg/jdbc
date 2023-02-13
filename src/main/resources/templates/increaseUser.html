@@ -1,0 +1,41 @@
+<!-- dkk -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>增加</title>
+</head>
+<body>
+<form method="post" th:action="@{/increaseUser}" >
+    <table>
+        <tr>
+            <td>账号：</td>
+            <td><input type="text" id="username" name="username"></td>
+        </tr>
+        <tr>
+            <td>密码：</td>
+            <td><input type="password" id="password" name="password"></td>
+        </tr>
+        <tr>
+            <td>年龄：</td>
+            <td><input type="text" id="age" name="age"></td>
+        </tr>
+        <tr>
+            <td>性别：</td>
+            <td><input type="text" id="gender" name="gender"></td>
+        </tr>
+        <tr>
+            <td>email：</td>
+            <td><input type="text" id="email" name="email"></td>
+        </tr>
+        <tr>
+            <td><input type="submit"></td>
+            <td><input type="reset"></td>
+            <td><a th:href="@{/}">返回主页</a></td>
+        </tr>
+    </table>
+</form>
+
+
+</body>
+</html>

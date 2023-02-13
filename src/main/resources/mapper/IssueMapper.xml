@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dk.jdbc.mapper.IssueMapper">
+    <!-- mapper接口类名和映射文件的类名保持一致
+         mapper接口的方法名要和映射文件sql的ID保持一致
+     -->
+    <insert id="addIssue" parameterType="com.dk.jdbc.pojo.Issue">
+        INSERT INTO issue (issue_id,distributor_name,goods_id,goods_name,category,issue_price,num,unit,cost,issue_date)
+        VALUES (#{issueId},#{distributorName},#{goodsId}, #{goodsName},#{category}, #{issuePrice}, #{num}, #{unit}, #{cost},#{issueDate});
+    </insert>
+    <select id="getMoney" resultType="java.lang.Double">
+        SELECT SUM(cost) FROM issue WHERE issue_date = #{date}
+    </select>
+    <select id="get7Day" resultType="com.dk.jdbc.pojo.Issue">
+        SELECT goods_name ,SUM(`num`) AS num FROM issue WHERE YEARWEEK( date_format( issue_date,'%Y-%m-%d' ) ) = YEARWEEK( now() )
+        GROUP BY goods_name
+    </select>
+
+    <select id="get30Day" resultType="com.dk.jdbc.pojo.Issue">
+        SELECT goods_name ,SUM(`num`) AS num FROM issue WHERE DATE_FORMAT( issue_date, '%Y%m' ) = DATE_FORMAT( CURDATE( ) ,'%Y%m' )
+        GROUP BY goods_name
+    </select>
+    <select id="getIssueCurve" resultType="com.dk.jdbc.pojo.Issue">
+        SELECT issue_date,sum(`num`) AS num
+        FROM issue
+        WHERE DATE_SUB(CURDATE(), INTERVAL 10 DAY) <![CDATA[<=]]> date(issue_date)
+        GROUP BY issue_date;
+    </select>
+    <select id="getIssueRanking" resultType="com.dk.jdbc.pojo.Issue">
+        SELECT goods_name,SUM(cost) AS cost
+        FROM `issue`
+        WHERE  DATE_SUB(CURDATE(), INTERVAL 30 DAY) <![CDATA[<=]]> date(issue_date)
+        GROUP BY goods_name
+        ORDER BY cost DESC
+    </select>
+</mapper>

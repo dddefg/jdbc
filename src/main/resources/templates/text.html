@@ -1,0 +1,131 @@
+<!-- dkk -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--蔬菜-->
+<div  id="aa" class="wrapper">
+    <section class="panel">
+        <header class="panel-heading">
+            蔬菜类
+            <span class="tools pull-right">
+<!--                        收缩-->
+                        <a class="fa fa-chevron-down" href="javascript:;"></a>
+                     </span>
+        </header>
+        <div class="panel-body">
+
+            <table style="margin: auto" border="1" width="80%">
+                <tr>
+                    <td colspan="11"align="center" >蔬菜入库记录</td>
+                </tr>
+                <tr >
+                    <td align="center">订单编号</td>
+                    <td align="center">供货商</td>
+                    <td align="center">商品编号</td>
+                    <td align="center">商品名</td>
+                    <td align="center">商品类别</td>
+                    <td align="center">单价</td>
+                    <td align="center">数量</td>
+                    <td align="center">计价单位</td>
+                    <td align="center">总价</td>
+                    <td align="center">日期</td>
+                    <td colspan="1">编辑</td>
+                </tr>
+                <tr  th:each="goods:${vegetables.list}">
+
+                    <th style="text-align: center" th:text="${goods.orderId}"></th>
+                    <th style="text-align: center" th:text="${goods.supplierName}"></th>
+                    <th style="text-align: center" th:text="${goods.goodsId}"></th>
+                    <th style="text-align: center" th:text="${goods.goodsName}"></th>
+                    <th style="text-align: center" th:text="${goods.category}"></th>
+                    <th style="text-align: center" th:text="${goods.price}"></th>
+                    <th style="text-align: center" th:text="${goods.num}"></th>
+                    <th style="text-align: center" th:text="${goods.unit}"></th>
+                    <th style="text-align: center" th:text="${goods.cost}"></th>
+                    <th style="text-align: center" th:text="${goods.date}"></th>
+                    <th style="text-align: center">修改</th>
+                </tr>
+<tr>
+    <a th:if="${vegetables.hasPreviousPage}" th:href="@{/ToGoodsInStock?vegetablesPn=1}">首页</a>
+    <a th:if="${vegetables.hasPreviousPage}" th:href="@{'/ToGoodsInStock?vegetablesPn='+${vegetables.prePage}}">上一页</a>
+    <span th:each="num: ${vegetables.navigatepageNums}">
+        <a th:if="${vegetables.pageNum == num}" style="color: #FF4400" th:href="@{'/ToGoodsInStock?vegetablesPn='+${num}}" th:text="'('+${num}+')'"></a>
+        <a th:if="${vegetables.pageNum != num}" th:href="@{'/ToGoodsInStock?vegetablesPn='+${num}}" th:text="${num}"></a>
+    </span>
+    <a th:if="${vegetables.hasNextPage}" th:href="@{'/ToGoodsInStock?vegetablesPn='+${vegetables.nextPage}}">下一页</a>
+    <a th:if="${vegetables.hasNextPage}" th:href="@{'/ToGoodsInStock?vegetablesPn='+${vegetables.pages}}">尾页</a>
+</tr>
+
+            </table>
+
+        </div>
+    </section>
+
+</div>
+<!--body wrapper end-->
+<div  class="wrapper">
+    <section class="panel">
+        <header class="panel-heading">
+            蔬菜类
+            <span class="tools pull-right">
+<!--                        收缩-->
+                        <a class="fa fa-chevron-down" href="javascript:;"></a>
+                     </span>
+        </header>
+        <div class="panel-body">
+
+            <table style="margin: auto" border="1" width="80%">
+                <tr>
+                    <td colspan="11"align="center" >蔬菜入库记录</td>
+                </tr>
+                <tr >
+                    <td align="center">订单编号</td>
+                    <td align="center">供货商</td>
+                    <td align="center">商品编号</td>
+                    <td align="center">商品名</td>
+                    <td align="center">商品类别</td>
+                    <td align="center">单价</td>
+                    <td align="center">数量</td>
+                    <td align="center">计价单位</td>
+                    <td align="center">总价</td>
+                    <td align="center">日期</td>
+                    <td colspan="1">编辑</td>
+                </tr>
+                <tr  th:each="goods:${vegetables.list}">
+
+                    <th style="text-align: center" th:text="${goods.orderId}"></th>
+                    <th style="text-align: center" th:text="${goods.supplierName}"></th>
+                    <th style="text-align: center" th:text="${goods.goodsId}"></th>
+                    <th style="text-align: center" th:text="${goods.goodsName}"></th>
+                    <th style="text-align: center" th:text="${goods.category}"></th>
+                    <th style="text-align: center" th:text="${goods.price}"></th>
+                    <th style="text-align: center" th:text="${goods.num}"></th>
+                    <th style="text-align: center" th:text="${goods.unit}"></th>
+                    <th style="text-align: center" th:text="${goods.cost}"></th>
+                    <th style="text-align: center" th:text="${goods.date}"></th>
+                    <th style="text-align: center">修改</th>
+                </tr>
+                <!--                        <tr>-->
+                <!--                            <th colspan="4">当前是第[[${vegetables.current}]]页,总计[[${vegetables.pages}]]页,-->
+                <!--                                共[[${vegetables.total}]]条记录</th>-->
+                <!--                            <th colspan="7">-->
+                <!--                                <a style="color: #837f7e" th:if="${vegetables.current != 1}" th:href="@{/ToGoodsInStock(pn=1)}">首页</a>-->
+                <!--                                <a style="color: #837f7e" th:if="${vegetables.current != 1}" th:href="@{/ToGoodsInStock(pn=${vegetables.current - 1})}">[[${vegetables.current - 1}]]</a>-->
+                <!--                                <a style="color: #837f7e">[[${vegetables.current}]]</a>-->
+                <!--                                <a style="color: #837f7e" th:if="${vegetables.current &lt vegetables.pages}  " th:href="@{/ToGoodsInStock(pn=${vegetables.current +1})}">[[${vegetables.current + 1}]]</a>-->
+                <!--                                <a style="color: #837f7e" th:if="${vegetables.current != vegetables.pages}" th:href="@{/ToGoodsInStock(pn=${vegetables.pages})}">末页</a>-->
+                <!--                            </th>-->
+                <!--                        </tr>-->
+
+            </table>
+
+        </div>
+    </section>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+File.RECENT_KEYS">
+      <recent name="D:\秃头小宝贝\尚硅谷SSM整合教程（2022新版）\笔记\demo1\SSM-WEB\src\main\webapp\static" />
+      <recent name="D:\秃头小宝贝\尚硅谷SSM整合教程（2022新版）\笔记\demo1\SSM-WEB\src\main\webapp\WEB-INF\templates" />
+      <recent name="D:\秃头小宝贝\尚硅谷SSM整合教程（2022新版）\笔记\demo1\SSM-WEB\src\main\java\com\dk\ssm\pojo" />
+      <recent name="D:\秃头小宝贝\尚硅谷SSM整合教程（2022新版）\笔记\demo1\SSM-WEB\src\main\resources\com\dk\ssm\mapper" />
+      <recent name="D:\秃头小宝贝\尚硅谷SSM整合教程（2022新版）\笔记\demo1\SSM-WEB\src\main\java" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\秃头小宝贝\尚硅谷SSM整合教程（2022新版）\笔记\demo1\spring_mvc_rest\src\main\webapp\WEB-INF\templates\employye" />
+      <recent name="D:\秃头小宝贝\尚硅谷SSM整合教程（2022新版）\笔记\demo1\spring-mvc-helloword\src\main\resources" />
+      <recent name="D:\秃头小宝贝\尚硅谷SSM整合教程（2022新版）\笔记\demo1\spring-mvc-helloword\src\main\webapp\WEB-INF\templates" />
+      <recent name="D:\秃头小宝贝\尚硅谷SSM整合教程（2022新版）\笔记\demo1\demo2\src\main\resources\com\dk\mybatis\mapper" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.dk.ssm" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.dk.ssm.controller" />
+      <recent name="pojo" />
+      <recent name="com.dk.spring.aop.annotation" />
+      <recent name="com.dk.mybatis.utils" />
+      <recent name="com.dk.mybatis.pojo" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Tomcat 服务器.MVC">
+    <configuration name="BookTest.books" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="spring-aop-transaction" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="BookTest" />
+      <option name="METHOD_NAME" value="books" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BookTest.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="spring-aop-transaction" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="BookTest" />
+      <option name="METHOD_NAME" value="test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="test.testAllUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="spring-aop-transaction" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="test" />
+      <option name="METHOD_NAME" value="testAllUser" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration

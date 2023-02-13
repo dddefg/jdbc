@@ -1,0 +1,92 @@
+<!-- dkk -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>公共页面</title>
+</head>
+<body>
+<!-- 头部信息开始-->
+<div id="header" class="header-section">
+
+    <!--toggle button start-->
+    <a class="toggle-btn"><i class="fa fa-bars"></i></a>
+    <!--toggle button end-->
+
+
+
+    <!--notification menu start -->
+    <div class="menu-right">
+        <ul class="notification-menu">
+
+            <li>
+                <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <img src="images/photos/hmboy.png" alt="" />
+                    [[${session.loginUser.username}]]
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                    <li><a href="#"><i class="fa fa-user"></i>  用户设置</a></li>
+                    <li><a href="#"><i class="fa fa-cog"></i>  系统设置</a></li>
+                    <li><a href="/loginOut"><i class="fa fa-sign-out"></i> 退出登录</a></li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+    <!--notification menu end -->
+
+</div>
+<!-- 头部信息结束-->
+
+
+<!-- 出入库趋势图开始 -->
+<div id="Trendchart" class="col-md-8">
+    <div class="panel">
+        <div class="panel-body">
+            <div class="row revenue-states">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <h4>出入库趋势图</h4>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <ul class="revenue-nav">
+                        <li ><a href="#">日</a></li>
+                        <li ><a href="#">周</a></li>
+                        <li ><a href="#">月</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+
+
+                    <div id="main-chart">
+                        <div id="main-chart-container" class="main-chart">
+                        </div>
+                    </div>
+                    <ul class="revenue-short-info">
+                        <li>
+                            <h1 class="red">15%</h1>
+                            <p>Server Load</p>
+                        </li>
+                        <li>
+                            <h1 class="purple">30%</h1>
+                            <p>Disk Space</p>
+                        </li>
+                        <li>
+                            <h1 class="green">84%</h1>
+                            <p>Transferred</p>
+                        </li>
+                        <li>
+                            <h1 class="blue">28%</h1>
+                            <p>Temperature</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 出入库趋势图结束 -->
+</body>
+</html>

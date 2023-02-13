@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dk.jdbc.mapper.UserMapper">
+    <!-- mapper接口类名和映射文件的类名保持一致
+         mapper接口的方法名要和映射文件sql的ID保持一致
+     -->
+    <select id="getUser" resultType="com.dk.jdbc.pojo.User">
+        select * from user where username=#{username}
+    </select>
+<!--    void addUser(User user);-->
+    <insert id="addUser" parameterType="com.dk.jdbc.pojo.User" >
+        insert into user (username,password,age,gender,email) values (#{username},#{password},#{age},#{gender},#{email})
+    </insert>
+</mapper>   

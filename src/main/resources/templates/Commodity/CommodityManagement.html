@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="ThemeBucket">
+  <link rel="shortcut icon" href="#" type="image/png">
+
+  <title>表单确认</title>
+
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/style-responsive.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="js/html5shiv.js"></script>
+  <script src="js/respond.min.js"></script>
+  <![endif]-->
+</head>
+<style>
+    .inputGoods{
+        width: 30%;
+        height: 40px;
+        float: left;
+        margin-left:15px;
+    }
+</style>
+<script>
+  function f() {
+      if ($('#orderId').val() == '' ){
+          //  alert("保证传入的不是空");
+          alert("请输入订单编号");
+          return false;
+      }
+      if ($('#goodsId').val() == '' ){
+          //  alert("保证传入的不是空");
+          alert("请输入商品编号");
+          return false;
+      }
+      if ($('#goodsName').val() == '' ){
+          //  alert("保证传入的不是空");
+          alert("请输入商品名称");
+          return false;
+      }
+     if ($('#price').val() == '' ){
+       //  alert("保证传入的不是空");
+         alert("请输入价格");
+         return false;
+     }
+      if ($('#num').val() == '' ){
+        //  alert("保证传入的不是空");
+          alert("请输入数量");
+          return false;
+      }
+      if ($('#date').val() == '' ){
+          //  alert("保证传入的不是空");
+          alert("请输入日期");
+          return false;
+      }
+      return true;
+  }
+
+</script>
+<body class="sticky-header">
+
+<section>
+    <!-- left side start-->
+    <div class="left-side sticky-left-side">
+
+        <!--logo and iconic logo start-->
+        <div class="logo">
+            <a href="index.html"><img src="images/logo.png" alt=""></a>
+        </div>
+
+        <div class="logo-icon text-center">
+            <a href="index.html"><img src="images/logo_icon.png" alt=""></a>
+        </div>
+        <!--logo and iconic logo end-->
+
+
+        <div class="left-side-inner">
+
+            <!-- visible to small devices only -->
+            <div class="visible-xs hidden-sm hidden-md hidden-lg">
+                <div class="media logged-user">
+                    <img alt="" src="images/photos/user-avatar.png" class="media-object">
+                    <div class="media-body">
+                        <h4><a href="#">John Doe</a></h4>
+                        <span>"Hello There..."</span>
+                    </div>
+                </div>
+
+                <h5 class="left-nav-title">Account Information</h5>
+                <ul class="nav nav-pills nav-stacked custom-nav">
+                    <li><a href="#"><i class="fa fa-user"></i> <span>Profile</span></a></li>
+                    <li><a href="#"><i class="fa fa-cog"></i> <span>Settings</span></a></li>
+                    <li><a href="#"><i class="fa fa-sign-out"></i> <span>Sign Out</span></a></li>
+                </ul>
+            </div>
+
+            <!--sidebar nav start-->
+            <ul class="nav nav-pills nav-stacked custom-nav">
+                <li><a href="index.html"><i class="fa fa-home"></i> <span>主页</span></a></li>
+                <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>Layouts</span></a>
+                    <ul class="sub-menu-list">
+                        <li ><a href="../temp/blank_page.html"> Blank Page</a></li>
+                        <li><a href="../temp/boxed_view.html"> Boxed Page</a></li>
+                        <li><a href="../temp/leftmenu_collapsed_view.html"> Sidebar Collapsed</a></li>
+                        <li><a href="../temp/horizontal_menu.html"> Horizontal Menu</a></li>
+
+                    </ul>
+                </li>
+                <li class="menu-list"><a href=""><i class="fa fa-book"></i> <span>UI Elements</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href="../temp/general.html"> General</a></li>
+                        <li><a href="../temp/buttons.html"> Buttons</a></li>
+                        <li><a href="../temp/tabs-accordions.html"> Tabs & Accordions</a></li>
+                        <li><a href="../temp/typography.html"> Typography</a></li>
+                        <li><a href="../temp/slider.html"> Slider</a></li>
+                        <li><a href="../temp/panels.html"> Panels</a></li>
+                    </ul>
+                </li>
+                <li class="menu-list"><a href=""><i class="fa fa-cogs"></i> <span>Components</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href="../temp/grids.html"> Grids</a></li>
+                        <li><a href="../temp/gallery.html"> Media Gallery</a></li>
+                        <li><a href="../temp/calendar.html"> Calendar</a></li>
+                        <li><a href="../temp/tree_view.html"> Tree View</a></li>
+                        <li><a href="../temp/nestable.html"> Nestable</a></li>
+
+                    </ul>
+                </li>
+
+                <li><a href="../temp/fontawesome.html"><i class="fa fa-bullhorn"></i> <span>Fontawesome</span></a></li>
+
+                <li class="menu-list"><a href=""><i class="fa fa-envelope"></i> <span>Mail</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href="../temp/mail.html"> Inbox</a></li>
+                        <li><a href="../temp/mail_compose.html"> Compose Mail</a></li>
+                        <li><a href="../temp/mail_view.html"> View Mail</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-list nav-active"><a href=""><i class="fa fa-tasks"></i> <span>商品管理</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a th:href="@{/ToGoodsInStock}"> 商品入库记录</a></li>
+                        <li><a th:href="@{/ToCommodityManagement}"> 商品入库</a></li>
+                        <li><a th:href="@{/ToGoodsIssue}"> 商品出库</a></li>
+                        <li><a th:href="@{/ToGoodsReturn}"> 商品退货</a></li>
+                        <li><a th:href="@{/ToGoodsLoss}"> 商品损耗报备</a></li>
+                        <li><a th:href="@{/ToBasicInformation}">商品基本信息</a></li>
+                    </ul>
+                </li>
+                <li class="menu-list"><a href=""><i class="fa fa-bar-chart-o"></i> <span>Charts</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a th:href="@{/ToStockInStatistics}"> 累计进货账单</a></li>
+                        <li><a href="../temp/morris.html"> Morris Charts</a></li>
+                        <li><a href="../temp/chartjs.html"> Chartjs</a></li>
+                        <li><a href="../temp/c3chart.html"> C3 Charts</a></li>
+                    </ul>
+                </li>
+                <li class="menu-list"><a href="#"><i class="fa fa-th-list"></i> <span>数据表</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href="basic_table.html"> 基础表</a></li>
+                        <li><a href="dynamic_table.html"> 动态表</a></li>
+                        <li><a href="responsive_table.html"> 回复表</a></li>
+                        <li><a href="editable_table.html"> 编辑表</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-list"><a href="#"><i class="fa fa-map-marker"></i> <span>Maps</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href="../temp/google_map.html"> Google Map</a></li>
+                        <li><a href="../temp/vector_map.html"> Vector Map</a></li>
+                    </ul>
+                </li>
+                <li class="menu-list"><a href=""><i class="fa fa-file-text"></i> <span>Extra Pages</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href="../temp/profile.html"> Profile</a></li>
+                        <li><a href="../temp/invoice.html"> Invoice</a></li>
+                        <li><a href="pricing_table.html"> Pricing Table</a></li>
+                        <li><a href="../temp/timeline.html"> Timeline</a></li>
+                        <li><a href="../temp/blog_list.html"> Blog List</a></li>
+                        <li><a href="../temp/blog_details.html"> Blog Details</a></li>
+                        <li><a href="../temp/directory.html"> Directory </a></li>
+                        <li><a href="../temp/chat.html"> Chat </a></li>
+                        <li><a href="404.html"> 404 Error</a></li>
+                        <li><a href="500.html"> 500 Error</a></li>
+                        <li><a href="../temp/registration.html"> Registration Page</a></li>
+                        <li><a href="../temp/lock_screen.html"> Lockscreen </a></li>
+                    </ul>
+                </li>
+                <li><a th:href="@{/loginOut}"><i class="fa fa-sign-in"></i> <span>退出登录</span></a></li>
+
+            </ul>
+            <!--sidebar nav end-->
+
+        </div>
+    </div>
+    <!-- left side end-->
+
+    <!-- main content start-->
+    <div class="main-content" >
+
+        <!-- header section start-->
+        <div th:replace="common :: #header"></div>
+        <!-- header section end-->
+
+        <!-- page heading start-->
+        <div class="page-heading">
+            <h3>
+                商品入库模块
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">商品管理</a>
+                </li>
+                <li class="active"> 商品入库 </li>
+            </ul>
+        </div>
+       导入菜单栏
+        <div  class="wrapper" style="height: 335px">
+            <section class="panel">
+                <header class="panel-heading">
+                    单次入库
+                    <label style="color: red" th:text="${addGoods}"></label>
+                    <span class="tools pull-right">
+<!--                        收缩-->
+                        <a class="fa fa-chevron-down" href="javascript:;"></a>
+                     </span>
+                </header>
+                <div class="panel-body">
+                    <form class="cmxform form-horizontal adminex-form" method="post" action="" th:action="@{/Purchase}" th:onsubmit="return f()">
+                        <div class="form-group ">
+                            <div>
+                                <div class="inputGoods">
+                                    订单编号：
+                                    <input type="text" id="orderId" name="orderId" placeholder="请输入订单编号" style="height:30px;width: 300px">
+                                </div>
+                                <div class="inputGoods"> 供货商名：
+                                    <input type="text"   name="supplierName" placeholder="请输入供货商名" style="height:30px;width: 300px"></div>
+                                <div class="inputGoods"> 商品编号：
+                                    <input type="text" id="goodsId" name="goodsId" placeholder="请输入商品编号" style="height:30px;width: 300px"> </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group ">
+                            <div>
+                                <div class="inputGoods"> 商品名称：
+                                    <input type="text" id="goodsName" placeholder="请输入商品名称" name="goodsName" style="height:30px;width: 300px">
+                                </div>
+                                <div class="inputGoods">
+                                    商品类别：
+                                    <input type="text" name="category" placeholder="请输入商品类别" style="height:30px;width: 300px">
+                                </div>
+                                <div class="inputGoods"> 进货单价：
+                                    <input id="price" placeholder="请输入进货单价" th:onchange="if(!/^(([1-9]{1}\d*)|(0{1}))(\.\d{1,2})?$/.test(value)){th:value='';}" type="text" name="price" style="height:30px;width: 300px"></div>
+
+                        </div>
+                            </div>
+                        <div class="form-group ">
+                            <div>
+                                <div class="inputGoods" > 入库数量：
+                                    <input placeholder="请输入入库数量" th:onchange="if(!/^(([1-9]{1}\d*)|(0{1}))(\.\d{1,2})?$/.test(value)){th:value='';}" type="text" id="num" name="num" style="height:30px;width: 300px"></div>
+                            </div>
+                            <div class="inputGoods"> 数量单位：
+                                <input type="text" placeholder="kg/盒/份" name="unit" style="height:30px;width: 300px">
+                            </div>
+                                <div class="inputGoods">入库日期:&nbsp&nbsp&nbsp
+                                    <input type="Date" placeholder="请输入入库日期" id="date" name="date" height="30px"    style="height:30px;width: 300px">
+                                </div>
+                        </div>
+                        <div class="form-group ">
+                            <div style=" text-align: center">
+                                <button  class="btn btn-primary" type="submit" >保存</button>
+                                <button class="btn btn-default" type="reset" >取消</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+
+
+        <div class="wrapper">
+            <div class="row">
+                <div>
+                    <div class="col-lg-6">
+                        <section class="panel">
+                            <header class="panel-heading">
+                                批量导入
+                                <label style="color: red" th:text="${param.GoodsBatch}" />
+
+                                <span class="tools pull-right">
+<!--                        收缩-->
+                        <a class="fa fa-chevron-down" href="javascript:;"></a>
+                     </span>
+                            </header>
+                            <div class="panel-body">
+                                不会导入？<a th:href="@{/Template}" >点击这有模板下载</a>
+                                </br></br>
+                                <form role="form" method="post" th:action="@{/Batch}" enctype="multipart/form-data">
+                                    <div class="form-group">
+
+                                        <input type="file" id="exampleInputFile" name="excel" >
+                                        <p class="help-block">选择Excel文件批量导入.</p>
+                                        <button type="submit" class="btn btn-primary">导入</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            2022 &copy; 板凳宽宽毕设作品 </a>
+        </footer>
+        <!--footer section end-->
+
+
+
+
+
+    </div>
+    <!-- main content end-->
+</section>
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="js/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/modernizr.min.js"></script>
+<script src="js/jquery.nicescroll.js"></script>
+
+<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+<script src="js/validation-init.js"></script>
+<script type="text/javascript" >
+
+</script>
+<!--common scripts for all pages-->
+<script src="js/scripts.js"></script>
+
+</body>
+</html>

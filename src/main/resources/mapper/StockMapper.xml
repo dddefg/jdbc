@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper接口类名和映射文件的类名保持一致
+         mapper接口的方法名要和映射文件sql的ID保持一致
+     -->
+<mapper namespace="com.dk.jdbc.mapper.StockMapper">
+    <update id="updateStock">
+        update stock SET
+            category = #{category} , num =#{num},unit = #{unit},last_purchase_date = #{lastPurchaseDate},last_issue_date = #{lastIssueDate}
+         WHERE goods_id = #{goodsId} and goods_name = #{goodsName}
+    </update>
+
+
+    <select id="getByIdAndName" resultType="com.dk.jdbc.pojo.Stock">
+        select * from stock where goods_id=#{goodsId} and goods_name=#{goodsName}
+    </select>
+
+    <insert id="addStock">
+insert into stock values (#{goodsId},#{goodsName},#{category},#{num},#{unit},#{lastPurchaseDate},#{lastIssueDate})
+    </insert>
+</mapper>

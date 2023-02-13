@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dk.jdbc.mapper.ReturnMapper">
+    <!-- mapper接口类名和映射文件的类名保持一致
+         mapper接口的方法名要和映射文件sql的ID保持一致
+     -->
+    <insert id="addReturn" parameterType="com.dk.jdbc.pojo.Return">
+        INSERT INTO `return` (supplier_name,goods_name,goods_id,category,num,unit,date)
+        VALUES (#{supplierName},#{goodsName},#{goodsId},#{category},#{num},#{unit},#{date});
+    </insert>
+    <select id="listA" resultType="com.dk.jdbc.pojo.Return">
+        select * from  `return`
+    </select>
+</mapper>

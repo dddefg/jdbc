@@ -106,7 +106,7 @@ public class UserController {
                 return "login";
             }
         }else {
-            model.addAttribute("msg", "账号不存在");
+            model.addAttribute("msg", "账号不存在。");
             //回到登录界面
             return "login";
         }

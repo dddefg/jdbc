@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="ThemeBucket">
+<!--  <link rel="shortcut icon" href="#" type="image/png">-->
+
+  <title>Flot Charts</title>
+
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/style-responsive.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="js/html5shiv.js"></script>
+  <script src="js/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body class="sticky-header">
+
+<section>
+    <!-- left side start-->
+    <div class="left-side sticky-left-side">
+
+        <!--logo and iconic logo start-->
+        <div class="logo">
+            <a href="index.html"><img src="images/logo2.png" alt=""></a>
+        </div>
+
+        <div class="logo-icon text-center">
+            <a href="index.html"><img src="images/logo_icon.png" alt=""></a>
+        </div>
+        <!--logo and iconic logo end-->
+
+
+        <div class="left-side-inner">
+
+            <!-- visible to small devices only -->
+            <div class="visible-xs hidden-sm hidden-md hidden-lg">
+                <div class="media logged-user">
+                    <img alt="" src="images/photos/user-avatar.png" class="media-object">
+                    <div class="media-body">
+                        <h4><a href="#">John Doe</a></h4>
+                        <span>"Hello There..."</span>
+                    </div>
+                </div>
+
+                <h5 class="left-nav-title">Account Information</h5>
+                <ul class="nav nav-pills nav-stacked custom-nav">
+                    <li><a href="#"><i class="fa fa-user"></i> <span>Profile</span></a></li>
+                    <li><a href="#"><i class="fa fa-cog"></i> <span>Settings</span></a></li>
+                    <li><a href="#"><i class="fa fa-sign-out"></i> <span>Sign Out</span></a></li>
+                </ul>
+            </div>
+
+            <!--sidebar nav start-->
+            <ul class="nav nav-pills nav-stacked custom-nav">
+                <li><a href="index.html"><i class="fa fa-home"></i> <span>主页</span></a></li>
+                <li class="menu-list"><a href=""><i class="fa fa-cogs"></i> <span>设置</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href="grids.html"> Grids</a></li>
+                        <li><a href="gallery.html"> Media Gallery</a></li>
+                        <li><a href="calendar.html"> Calendar</a></li>
+                        <li><a href="tree_view.html"> Tree View</a></li>
+                        <li><a href="nestable.html"> Nestable</a></li>
+
+                    </ul>
+                </li>
+
+
+
+<!--                <li class="menu-list"><a href=""><i class="fa fa-envelope"></i> <span>Mail</span></a>-->
+<!--                    <ul class="sub-menu-list">-->
+<!--                        <li><a href="mail.html"> Inbox</a></li>-->
+<!--                        <li><a href="mail_compose.html"> Compose Mail</a></li>-->
+<!--                        <li><a href="mail_view.html"> View Mail</a></li>-->
+<!--                    </ul>-->
+<!--                </li>-->
+
+                <li class="menu-list"><a href=""><i class="fa fa-tasks"></i> <span>商品管理</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a th:href="@{/ToCommodityManagement}"> 商品入库</a></li>
+                        <li><a th:href="@{/ToGoodsIssue}"> 商品出库</a></li>
+                        <li><a th:href="@{/ToGoodsReturn}"> 商品退货</a></li>
+                        <li><a th:href="@{/ToGoodsLoss}"> 商品损耗报备</a></li>
+                        <li><a th:href="@{/ToBasicInformation}">商品基本信息</a></li>                     </ul>
+                </li>
+                <li class="menu-list nav-active"><a href=""><i class="fa fa-bar-chart-o"></i> <span>入库记录</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a th:href="@{/ToGoodsInStock}"> 商品入库记录</a></li>
+                        <li><a th:href="@{/ToWarehousingAnalysis}"> 入库分析</a></li>
+                        <li><a href="morris.html"> Morris Charts</a></li>
+                        <li><a href="chartjs.html"> Chartjs</a></li>
+                        <li><a href="c3chart.html"> C3 Charts</a></li>
+                    </ul>
+                </li>
+                <li class="menu-list"><a href="#"><i class="fa fa-th-list"></i> <span>出库记录</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a th:href="@{/toOutboundGoods}">商品出库查询</a></li>
+                        <li><a th:href="@{/toDeliveryAnalysis}">商品出库分析</a></li>
+                        <li><a href="responsive_table.html"> Responsive Table</a></li>
+                        <li><a href="editable_table.html"> Edit Table</a></li>
+                    </ul>
+                </li>
+
+
+
+                <li><a th:href="@{/loginOut}"><i class="fa fa-sign-in"></i> <span>退出登录</span></a></li>
+
+            </ul>
+            <!--sidebar nav end-->
+
+        </div>
+    </div>
+    <!-- left side end-->
+    
+    <!-- main content start-->
+    <div class="main-content" >
+
+        <!-- header section start-->
+        <div th:replace="common :: #header"></div>
+        <!-- header section end-->
+
+        <!-- page heading start-->
+        <div class="page-heading">
+            <h3>
+                入库记录
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">入库记录</a>
+                </li>
+                <li class="active"> 入库分析 </li>
+            </ul>
+        </div>
+        <!-- page heading end-->
+
+        <!--body wrapper start-->
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            商品入库量及价格情况
+                            <form th:action="@{/ToWarehousingAnalysis}" method="post">
+                                商品名称：
+                                <input type="text" name="goodsName" th:value="${flotGoodsNameText}">
+                                日期:
+                                <input type="radio" value="day" name="specificDate"  th:checked="${flotGoodsDateText}"/>日
+                                <input type="radio" value="month" name="specificDate" th:checked="${flotGoodsDateText1}"/>月
+
+                                <input type="submit" value="查询">
+                            </form>
+                        <span class="tools pull-right">
+                            <a href="javascript:;" class="fa fa-chevron-down"></a>
+                            <a href="javascript:;" class="fa fa-times"></a>
+                         </span>
+                        </header>
+                        <div class="panel-body">
+                            <div id="visitors-chart">
+                                <div id="visitors-container" style="width: 100%;height:300px; text-align: center; margin:0 auto;">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            最近一年入库情况(按周统计)
+                        <span class="tools pull-right">
+                            <a href="javascript:;" class="fa fa-chevron-down"></a>
+                            <a href="javascript:;" class="fa fa-times"></a>
+                         </span>
+                        </header>
+                        <div class="panel-body">
+                            <div id="reatltime-chart">
+                                <div id="reatltime-chartContainer" style="width:100%;height:300px; text-align: center; margin:0 auto;">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+        </div>
+        <footer>
+            2022 &copy; 板凳宽宽毕设作品 </a>
+        </footer>
+
+
+
+    </div>
+    <!-- main content end-->
+</section>
+
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="js/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/modernizr.min.js"></script>
+<script src="js/jquery.nicescroll.js"></script>
+
+<!-- jQuery Flot Chart-->
+<script src="js/flot-chart/jquery.flot.js"></script>
+<script src="js/flot-chart/jquery.flot.tooltip.js"></script>
+<script src="js/flot-chart/jquery.flot.resize.js"></script>
+<script src="js/flot-chart/jquery.flot.pie.resize.js"></script>
+<script src="js/flot-chart/jquery.flot.selection.js"></script>
+<script src="js/flot-chart/jquery.flot.stack.js"></script>
+<script src="js/flot-chart/jquery.flot.time.js"></script>
+<!--<script src="js/flot.chart.init.js"></script>-->
+
+<!--common scripts for all pages-->
+<script src="js/scripts.js"></script>
+<script>
+
+    var data7_1 = [
+        [1354586000000, [[${WarehousingAnalysisName0}]]],
+        [1354587000000, [[${WarehousingAnalysisName1}]]],
+        [1354588000000, [[${WarehousingAnalysisName2}]]],
+        [1354589000000, [[${WarehousingAnalysisName3}]]],
+        [1354590000000, [[${WarehousingAnalysisName4}]]],
+        [1354591000000, [[${WarehousingAnalysisName5}]]],
+        [1354592000000, [[${WarehousingAnalysisName6}]]],
+        [1354593000000, [[${WarehousingAnalysisName7}]]],
+        [1354594000000, [[${WarehousingAnalysisName8}]]],
+        [1354595000000, [[${WarehousingAnalysisName9}]]],
+        [1354596000000, [[${WarehousingAnalysisName10}]]],
+        [1354597000000, [[${WarehousingAnalysisName11}]]]
+    ];
+
+    var data7_2 = [
+        [1354586000000, [[${WarehousingAnalysisPrice0}]]],
+        [1354587000000, [[${WarehousingAnalysisPrice1}]]],
+        [1354588000000, [[${WarehousingAnalysisPrice2}]]],
+        [1354589000000, [[${WarehousingAnalysisPrice3}]]],
+        [1354590000000, [[${WarehousingAnalysisPrice4}]]],
+        [1354591000000, [[${WarehousingAnalysisPrice5}]]],
+        [1354592000000, [[${WarehousingAnalysisPrice6}]]],
+        [1354593000000, [[${WarehousingAnalysisPrice7}]]],
+        [1354594000000, [[${WarehousingAnalysisPrice8}]]],
+        [1354595000000, [[${WarehousingAnalysisPrice9}]]],
+        [1354596000000, [[${WarehousingAnalysisPrice10}]]],
+        [1354597000000, [[${WarehousingAnalysisPrice11}]]]
+    ];
+    $(function() {
+        $.plot($("#visitors-chart #visitors-container"), [{
+                data: data7_1,
+                label: "[[${sellText}]] /左",
+                lines: {
+                    fill: true
+                }
+            }, {
+                data: data7_2,
+                label: "[[${priceText}]] /右",
+
+                points: {
+                    show: true
+                },
+                lines: {
+                    show: true
+                },
+                yaxis: 2
+            }
+            ],
+            {
+                series: {
+                    lines: {
+                        show: true,
+                        fill: false
+                    },
+                    points: {
+                        show: true,
+                        lineWidth: 2,
+                        fill: true,
+                        fillColor: "#ffffff",
+                        symbol: "circle",
+                        radius: 5
+                    },
+                    shadowSize: 0
+                },
+                grid: {
+                    hoverable: true,
+                    clickable: true,
+                    tickColor: "#f9f9f9",
+                    borderWidth: 1,
+                    borderColor: "#eeeeee"
+                },
+                colors: ["#65CEA7", "#424F63"],
+                tooltip: true,
+                tooltipOpts: {
+                    defaultTheme: false
+                },
+                xaxis: {
+                    mode: "time"
+
+
+                },
+                yaxes: [{
+                    /* First y axis */
+                }, {
+                    /* Second y axis */
+                    position: "right" /* left or right */
+                }]
+            }
+        );
+    });
+
+    $(function() {
+        var data1 = [];
+        var totalPoints = 10;
+        function GetData() {
+            data1.shift();
+            while (data1.length < totalPoints) {
+                var prev = data1.length > 0 ? data1[data1.length - 1] : 50;
+                var y = prev + Math.random() * 10 - 5;
+                y = y < 0 ? 0 : (y > 100 ? 100 : y);
+                data1.push(y);
+            }
+            var result = [];
+            // for (var i = 0; i < data1.length; ++i) {
+            //    // var a=WarehousingAnalysisNum+i;
+            //    // var a= [[${WarehousingAnalysisNum1}]];
+            //     result.push([i, [[${WarehousingAnalysisNum1}]]])
+            // }
+            // result.push([0, [[${WarehousingAnalysisNum0}]]])
+            result.push([0, [[${WarehousingAnalysisNum52}]]])
+            result.push([1, [[${WarehousingAnalysisNum51}]]])
+            result.push([2, [[${WarehousingAnalysisNum50}]]])
+            result.push([3, [[${WarehousingAnalysisNum49}]]])
+            result.push([4, [[${WarehousingAnalysisNum48}]]])
+            result.push([5, [[${WarehousingAnalysisNum47}]]])
+            result.push([6, [[${WarehousingAnalysisNum46}]]])
+            result.push([7, [[${WarehousingAnalysisNum45}]]])
+            result.push([8, [[${WarehousingAnalysisNum44}]]])
+            result.push([9, [[${WarehousingAnalysisNum43}]]])
+            result.push([10, [[${WarehousingAnalysisNum42}]]])
+            result.push([11, [[${WarehousingAnalysisNum41}]]])
+            result.push([12, [[${WarehousingAnalysisNum40}]]])
+            result.push([13, [[${WarehousingAnalysisNum39}]]])
+            result.push([14, [[${WarehousingAnalysisNum38}]]])
+            result.push([15, [[${WarehousingAnalysisNum37}]]])
+            result.push([16, [[${WarehousingAnalysisNum36}]]])
+            result.push([17, [[${WarehousingAnalysisNum35}]]])
+            result.push([18, [[${WarehousingAnalysisNum34}]]])
+            result.push([19, [[${WarehousingAnalysisNum33}]]])
+            result.push([20, [[${WarehousingAnalysisNum32}]]])
+            result.push([21, [[${WarehousingAnalysisNum31}]]])
+            result.push([22, [[${WarehousingAnalysisNum30}]]])
+            result.push([23, [[${WarehousingAnalysisNum29}]]])
+            result.push([24, [[${WarehousingAnalysisNum28}]]])
+            result.push([25, [[${WarehousingAnalysisNum27}]]])
+            result.push([26, [[${WarehousingAnalysisNum26}]]])
+            result.push([27, [[${WarehousingAnalysisNum25}]]])
+            result.push([28, [[${WarehousingAnalysisNum24}]]])
+            result.push([29, [[${WarehousingAnalysisNum23}]]])
+            result.push([30, [[${WarehousingAnalysisNum22}]]])
+            result.push([31, [[${WarehousingAnalysisNum21}]]])
+            result.push([32, [[${WarehousingAnalysisNum20}]]])
+            result.push([33, [[${WarehousingAnalysisNum19}]]])
+            result.push([34, [[${WarehousingAnalysisNum18}]]])
+            result.push([35, [[${WarehousingAnalysisNum17}]]])
+            result.push([36, [[${WarehousingAnalysisNum16}]]])
+            result.push([37, [[${WarehousingAnalysisNum15}]]])
+            result.push([38, [[${WarehousingAnalysisNum14}]]])
+            result.push([39, [[${WarehousingAnalysisNum13}]]])
+            result.push([40, [[${WarehousingAnalysisNum12}]]])
+            result.push([41, [[${WarehousingAnalysisNum11}]]])
+            result.push([42, [[${WarehousingAnalysisNum10}]]])
+            result.push([43, [[${WarehousingAnalysisNum9}]]])
+            result.push([44, [[${WarehousingAnalysisNum8}]]])
+            result.push([45, [[${WarehousingAnalysisNum7}]]])
+            result.push([46, [[${WarehousingAnalysisNum6}]]])
+            result.push([47, [[${WarehousingAnalysisNum5}]]])
+            result.push([48, [[${WarehousingAnalysisNum4}]]])
+            result.push([49, [[${WarehousingAnalysisNum3}]]])
+            result.push([50, [[${WarehousingAnalysisNum2}]]])
+            result.push([51, [[${WarehousingAnalysisNum1}]]])
+            return result;
+        }
+        var updateInterval = 100;
+        var plot = $.plot($("#reatltime-chart #reatltime-chartContainer"), [
+            GetData()], {
+            series: {
+                lines: {
+                    show: true,
+                    fill: true
+                },
+                shadowSize: 0
+            },
+            yaxis: {
+                min: 0,
+                max: 100,
+                ticks: 10
+            },
+            xaxis: {
+                show: false
+            },
+            grid: {
+                hoverable: true,
+                clickable: true,
+                tickColor: "#f9f9f9",
+                borderWidth: 1,
+                borderColor: "#eeeeee"
+            },
+            colors: ["#424F63"],
+            tooltip: true,
+            tooltipOpts: {
+                defaultTheme: false
+            }
+        });
+        function update() {
+            plot.setData([GetData()]);
+            plot.draw();
+            setTimeout(update, updateInterval);
+        }
+        update();
+    });
+
+    $(function() {
+        var data24Hours = [
+            [0, 601],
+            [1, 520],
+            [2, 337],
+            [3, 261],
+            [4, 157],
+            [5, 78],
+            [6, 58],
+            [7, 48],
+            [8, 54],
+            [9, 38],
+            [10, 88],
+            [11, 214],
+            [12, 364],
+            [13, 449],
+            [14, 558],
+            [15, 282],
+            [16, 379],
+            [17, 429],
+            [18, 518],
+            [19, 470],
+            [20, 330],
+            [21, 245],
+            [22, 358],
+            [23, 74]
+        ];
+        var data48Hours = [
+            [0, 445],
+            [1, 592],
+            [2, 738],
+            [3, 532],
+            [4, 234],
+            [5, 143],
+            [6, 147],
+            [7, 63],
+            [8, 64],
+            [9, 43],
+            [10, 86],
+            [11, 201],
+            [12, 315],
+            [13, 397],
+            [14, 512],
+            [15, 281],
+            [16, 360],
+            [17, 479],
+            [18, 425],
+            [19, 453],
+            [20, 422],
+            [21, 355],
+            [22, 340],
+            [23, 801]
+        ];
+        var dataDifference = [
+            [23, 727],
+            [22, 18],
+            [21, 110],
+            [20, 92],
+            [19, 17],
+            [18, 93],
+            [17, 50],
+            [16, 19],
+            [15, 1],
+            [14, 46],
+            [13, 52],
+            [12, 49],
+            [11, 13],
+            [10, 2],
+            [9, 5],
+            [8, 10],
+            [7, 15],
+            [6, 89],
+            [5, 65],
+            [4, 77],
+            [3, 271],
+            [2, 401],
+            [1, 72],
+            [0, 156]
+        ];
+        var ticks = [
+            [0, "22h"],
+            [1, ""],
+            [2, "00h"],
+            [3, ""],
+            [4, "02h"],
+            [5, ""],
+            [6, "04h"],
+            [7, ""],
+            [8, "06h"],
+            [9, ""],
+            [10, "08h"],
+            [11, ""],
+            [12, "10h"],
+            [13, ""],
+            [14, "12h"],
+            [15, ""],
+            [16, "14h"],
+            [17, ""],
+            [18, "16h"],
+            [19, ""],
+            [20, "18h"],
+            [21, ""],
+            [22, "20h"],
+            [23, ""]
+        ];
+        var data = [{
+            label: "Last 24 Hours",
+            data: data24Hours,
+            lines: {
+                show: true,
+                fill: true
+            },
+            points: {
+                show: true
+            }
+        }, {
+            label: "Last 48 Hours",
+            data: data48Hours,
+            lines: {
+                show: true
+            },
+            points: {
+                show: true
+            }
+        }, {
+            label: "Difference",
+            data: dataDifference,
+            bars: {
+                show: true
+            }
+        }];
+        var options = {
+            xaxis: {
+                ticks: ticks
+            },
+            series: {
+                shadowSize: 0
+            },
+            grid: {
+                hoverable: true,
+                clickable: true,
+                tickColor: "#f9f9f9",
+                borderWidth: 1,
+                borderColor: "#eeeeee"
+            },
+            colors: ["#6dc5a3", "#869cb3"],
+            tooltip: true,
+            tooltipOpts: {
+                defaultTheme: false
+            },
+            legend: {
+                labelBoxBorderColor: "#000000",
+                container: $("#legendcontainer26"),
+                noColumns: 0
+            }
+        };
+        var plot = $.plot($("#" +
+                "chart #combine-chartContainer"),
+            data, options);
+    });
+</script>
+</body>
+</html>

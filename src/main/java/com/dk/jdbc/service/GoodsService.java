@@ -23,4 +23,9 @@ public interface GoodsService extends IService<Goods> {
     List<Goods> getGoodsCurve();
 
 
+    List<Goods> WarehousingAnalysisByName(String goodsName);
+
+    List<Goods> monthWarehousingAnalysisByName(String goodsName,Date date);
+
+    List<Goods> getNum365(Date date);
 }

@@ -60,5 +60,37 @@
         date;
 
     </select>
+<!--    查询某个商品最近12天的入库量-->
+    <select id="WarehousingAnalysisByName" resultType="com.dk.jdbc.pojo.Goods">
+        SELECT
+            goods_name,date,sum(`num`) AS num,SUM(`cost`) AS cost
+        FROM
+            goods
+        WHERE
+            DATE_SUB(CURDATE(), INTERVAL 12 DAY) <![CDATA[<=]]> date(date) AND goods_name = #{goodsName}
+        GROUP BY
+            date;
+    </select>
+<!--    按月份查询商品每月销量  price为月份，借存在price-->
+    <select id="monthWarehousingAnalysisByName" resultType="com.dk.jdbc.pojo.Goods">
+        SELECT
+            sum(`num`) AS num,SUM(cost) AS cost,
+            MONTH(date) price
+        FROM goods
+        WHERE goods_name=#{goodsName} AND date > #{date}
+        GROUP BY MONTH(date)
+    </select>
+    <select id="getNum365" resultType="com.dk.jdbc.pojo.Goods">
+        SELECT
+            SUM(num) AS num,
+            WEEK(date) price
+        FROM
+            goods
+        WHERE date > #{date}
+        GROUP BY
+            WEEK(date)
+        ORDER BY
+            WEEK(date) DESC;
+    </select>
 
 </mapper>

@@ -70,7 +70,7 @@
 
         <!--logo and iconic logo start-->
         <div class="logo">
-            <a href="index.html"><img src="images/logo.png" alt=""></a>
+            <a href="index.html"><img src="images/logo2.png" alt=""></a>
         </div>
 
         <div class="logo-icon text-center">
@@ -102,26 +102,8 @@
             <!--sidebar nav start-->
             <ul class="nav nav-pills nav-stacked custom-nav">
                 <li><a href="index.html"><i class="fa fa-home"></i> <span>主页</span></a></li>
-                <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>Layouts</span></a>
-                    <ul class="sub-menu-list">
-                        <li ><a href="../temp/blank_page.html"> Blank Page</a></li>
-                        <li><a href="../temp/boxed_view.html"> Boxed Page</a></li>
-                        <li><a href="../temp/leftmenu_collapsed_view.html"> Sidebar Collapsed</a></li>
-                        <li><a href="../temp/horizontal_menu.html"> Horizontal Menu</a></li>
 
-                    </ul>
-                </li>
-                <li class="menu-list"><a href=""><i class="fa fa-book"></i> <span>UI Elements</span></a>
-                    <ul class="sub-menu-list">
-                        <li><a href="../temp/general.html"> General</a></li>
-                        <li><a href="../temp/buttons.html"> Buttons</a></li>
-                        <li><a href="../temp/tabs-accordions.html"> Tabs & Accordions</a></li>
-                        <li><a href="../temp/typography.html"> Typography</a></li>
-                        <li><a href="../temp/slider.html"> Slider</a></li>
-                        <li><a href="../temp/panels.html"> Panels</a></li>
-                    </ul>
-                </li>
-                <li class="menu-list"><a href=""><i class="fa fa-cogs"></i> <span>Components</span></a>
+                <li class="menu-list"><a href=""><i class="fa fa-cogs"></i> <span>设置</span></a>
                     <ul class="sub-menu-list">
                         <li><a href="../temp/grids.html"> Grids</a></li>
                         <li><a href="../temp/gallery.html"> Media Gallery</a></li>
@@ -132,19 +114,12 @@
                     </ul>
                 </li>
 
-                <li><a href="../temp/fontawesome.html"><i class="fa fa-bullhorn"></i> <span>Fontawesome</span></a></li>
 
-                <li class="menu-list"><a href=""><i class="fa fa-envelope"></i> <span>Mail</span></a>
-                    <ul class="sub-menu-list">
-                        <li><a href="../temp/mail.html"> Inbox</a></li>
-                        <li><a href="../temp/mail_compose.html"> Compose Mail</a></li>
-                        <li><a href="../temp/mail_view.html"> View Mail</a></li>
-                    </ul>
-                </li>
+
+
 
                 <li class="menu-list nav-active"><a href=""><i class="fa fa-tasks"></i> <span>商品管理</span></a>
                     <ul class="sub-menu-list">
-                        <li><a th:href="@{/ToGoodsInStock}"> 商品入库记录</a></li>
                         <li><a th:href="@{/ToCommodityManagement}"> 商品入库</a></li>
                         <li><a th:href="@{/ToGoodsIssue}"> 商品出库</a></li>
                         <li><a th:href="@{/ToGoodsReturn}"> 商品退货</a></li>
@@ -152,45 +127,26 @@
                         <li><a th:href="@{/ToBasicInformation}">商品基本信息</a></li>
                     </ul>
                 </li>
-                <li class="menu-list"><a href=""><i class="fa fa-bar-chart-o"></i> <span>Charts</span></a>
+                <li class="menu-list"><a href=""><i class="fa fa-bar-chart-o"></i> <span>入库记录</span></a>
                     <ul class="sub-menu-list">
-                        <li><a th:href="@{/ToStockInStatistics}"> 累计进货账单</a></li>
+                        <li><a th:href="@{/ToGoodsInStock}"> 商品入库记录</a></li>
+                        <li><a th:href="@{/ToWarehousingAnalysis}"> 入库分析</a></li>
                         <li><a href="../temp/morris.html"> Morris Charts</a></li>
                         <li><a href="../temp/chartjs.html"> Chartjs</a></li>
                         <li><a href="../temp/c3chart.html"> C3 Charts</a></li>
                     </ul>
                 </li>
-                <li class="menu-list"><a href="#"><i class="fa fa-th-list"></i> <span>数据表</span></a>
+                <li class="menu-list"><a href="#"><i class="fa fa-th-list"></i> <span>出库记录</span></a>
                     <ul class="sub-menu-list">
-                        <li><a href="basic_table.html"> 基础表</a></li>
-                        <li><a href="dynamic_table.html"> 动态表</a></li>
+                        <li><a th:href="@{/toOutboundGoods}">商品出库查询</a></li>
+                        <li><a th:href="@{/toDeliveryAnalysis}">商品出库分析</a></li>
                         <li><a href="responsive_table.html"> 回复表</a></li>
                         <li><a href="editable_table.html"> 编辑表</a></li>
                     </ul>
                 </li>
 
-                <li class="menu-list"><a href="#"><i class="fa fa-map-marker"></i> <span>Maps</span></a>
-                    <ul class="sub-menu-list">
-                        <li><a href="../temp/google_map.html"> Google Map</a></li>
-                        <li><a href="../temp/vector_map.html"> Vector Map</a></li>
-                    </ul>
-                </li>
-                <li class="menu-list"><a href=""><i class="fa fa-file-text"></i> <span>Extra Pages</span></a>
-                    <ul class="sub-menu-list">
-                        <li><a href="../temp/profile.html"> Profile</a></li>
-                        <li><a href="../temp/invoice.html"> Invoice</a></li>
-                        <li><a href="pricing_table.html"> Pricing Table</a></li>
-                        <li><a href="../temp/timeline.html"> Timeline</a></li>
-                        <li><a href="../temp/blog_list.html"> Blog List</a></li>
-                        <li><a href="../temp/blog_details.html"> Blog Details</a></li>
-                        <li><a href="../temp/directory.html"> Directory </a></li>
-                        <li><a href="../temp/chat.html"> Chat </a></li>
-                        <li><a href="404.html"> 404 Error</a></li>
-                        <li><a href="500.html"> 500 Error</a></li>
-                        <li><a href="../temp/registration.html"> Registration Page</a></li>
-                        <li><a href="../temp/lock_screen.html"> Lockscreen </a></li>
-                    </ul>
-                </li>
+
+
                 <li><a th:href="@{/loginOut}"><i class="fa fa-sign-in"></i> <span>退出登录</span></a></li>
 
             </ul>

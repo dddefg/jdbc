@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"></html>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -7,8 +8,12 @@
   <meta name="author" content="ThemeBucket">
   <link rel="shortcut icon" href="#" type="image/png">
 
-  <title>表单确认</title>
+  <title>出库查询</title>
 
+  <!--dropzone css-->
+  <link href="js/dropzone/css/dropzone.css" rel="stylesheet"/>
+
+  <!--common css-->
   <link href="css/style.css" rel="stylesheet">
   <link href="css/style-responsive.css" rel="stylesheet">
 
@@ -18,14 +23,7 @@
   <script src="js/respond.min.js"></script>
   <![endif]-->
 </head>
-<style>
-    .inputGoods{
-        width: 30%;
-        height: 40px;
-        float: left;
-        margin-left:15px;
-    }
-</style>
+
 <body class="sticky-header">
 
 <section>
@@ -34,7 +32,7 @@
 
         <!--logo and iconic logo start-->
         <div class="logo">
-            <a href="index.html"><img src="images/logo2.png" alt=""></a>
+            <a href="index.html"><img src="images/logo1.png" alt=""></a>
         </div>
 
         <div class="logo-icon text-center">
@@ -82,13 +80,15 @@
 
 
 
-                <li class="menu-list nav-active"><a href=""><i class="fa fa-tasks"></i> <span>商品管理</span></a>
+
+                <li class="menu-list"><a href=""><i class="fa fa-tasks"></i> <span>商品管理</span></a>
                     <ul class="sub-menu-list">
                         <li><a th:href="@{/ToCommodityManagement}"> 商品入库</a></li>
                         <li><a th:href="@{/ToGoodsIssue}"> 商品出库</a></li>
                         <li><a th:href="@{/ToGoodsReturn}"> 商品退货</a></li>
                         <li><a th:href="@{/ToGoodsLoss}"> 商品损耗报备</a></li>
-                        <li><a th:href="@{/ToBasicInformation}">商品基本信息</a></li>                     </ul>
+                        <li><a th:href="@{/ToBasicInformation}">商品基本信息</a></li>
+                    </ul>
                 </li>
                 <li class="menu-list"><a href=""><i class="fa fa-bar-chart-o"></i> <span>入库记录</span></a>
                     <ul class="sub-menu-list">
@@ -99,7 +99,7 @@
                         <li><a href="../temp/c3chart.html"> C3 Charts</a></li>
                     </ul>
                 </li>
-                <li class="menu-list"><a href="#"><i class="fa fa-th-list"></i> <span>出库记录</span></a>
+                <li class="menu-list  nav-active"><a href="#"><i class="fa fa-th-list"></i> <span>出库记录</span></a>
                     <ul class="sub-menu-list">
                         <li><a th:href="@{/toOutboundGoods}">商品出库查询</a></li>
                         <li><a th:href="@{/toDeliveryAnalysis}">商品出库分析</a></li>
@@ -118,127 +118,52 @@
         </div>
     </div>
     <!-- left side end-->
-
+    
     <!-- main content start-->
     <div class="main-content" >
 
-        <!-- header section start-->
         <div th:replace="common :: #header"></div>
-        <!-- header section end-->
-
         <!-- page heading start-->
         <div class="page-heading">
             <h3>
-                商品出库模块
+                商品入库记录
             </h3>
             <ul class="breadcrumb">
                 <li>
                     <a href="#">商品管理</a>
                 </li>
-                <li class="active"> 商品出库 </li>
+                <li class="active">商品库存查询</li>
             </ul>
         </div>
         <!-- page heading end-->
 
-        <!--单次退货-->
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 退货菜单栏
-        <div  class="wrapper" style="height: 335px">
+
+
+        <!--入库展示-->
+        <div  class="wrapper" style="height: 800px">
             <section class="panel">
                 <header class="panel-heading">
-                    单次退货
-                    <label style="color: red" th:text="${addReturn}"></label>
+                    入库查询
                     <span class="tools pull-right">
 <!--                        收缩-->
                         <a class="fa fa-chevron-down" href="javascript:;"></a>
                      </span>
                 </header>
                 <div class="panel-body">
-                    <form class="cmxform form-horizontal adminex-form" method="post" action="" th:action="@{/GoodsReturn}">
-                        <div class="form-group ">
-                            <div>
-                                <div class="inputGoods">
-                                    供货商名：
-                                    <input type="text" name="supplierName" style="height:30px;width: 300px">
-                                </div>
-                                <div class="inputGoods"> 商品编号：
-                                    <input type="text" name="goodsId" style="height:30px;width: 300px"></div>
-                                <div class="inputGoods"> 商品名称：
-                                    <input type="text" name="goodsName" style="height:30px;width: 300px"> </div>
-                            </div>
-
-                        </div>
-                        <div class="form-group ">
-                            <div>
-                                <div class="inputGoods"> 商品类别：
-                                    <input type="text" name="category" style="height:30px;width: 300px">
-                                </div>
-                                <div class="inputGoods">
-                                    退货数量：
-                                    <input type="number" name="num" style="height:30px;width: 300px">
-                                </div>
-                                <div class="inputGoods"> 数量单位：
-                                    <input type="text" name="unit" style="height:30px;width: 300px"></div>
-
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <div>
-                            <div class="inputGoods">退货日期：
-                                <input type="Date" name="date" height="30px"    style="height:30px;width: 300px">
-                            </div>
-                        </div>
-                        <div class="form-group ">
-                            <div style=" text-align: center">
-                                <button class="btn btn-primary" type="submit">保存</button>
-                                <button class="btn btn-default" type="reset" >取消</button>
-                            </div>
-                        </div>
-                        </div>
-                    </form>
+                    <iframe th:src="Vegetables"  style="margin: auto" width="100%" height= "600px" name="topFrame"   scrolling="No" noresize="noresize" frameborder="0" id="topFrame"></iframe>
                 </div>
             </section>
-        </div>
 
-        <!--批量出库-->
-        <div class="wrapper">
-            <div class="row">
-                <div>
-                    <div class="col-lg-6">
-                        <section class="panel">
-                            <header class="panel-heading">
-                                批量退货
-                                <label style="color: red" th:text="${param.ReturnBatch}" />
-                                <span class="tools pull-right">
-<!--                        收缩-->
-                        <a class="fa fa-chevron-down" href="javascript:;"></a>
-                     </span>
-                            </header>
-                            <div class="panel-body">
-                                不会？<a th:href="@{/Template}" >点击这有模板下载</a>
-                                </br></br>
-                                <form role="form" method="post" th:action="@{/Batch}" enctype="multipart/form-data">
-                                    <div class="form-group">
-
-                                        <input type="file" id="exampleInputFile" name="excel" >
-                                        <p class="help-block">选择Excel文件批量导入.</p>
-                                        <button type="submit" class="btn btn-primary">导入</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-            </div>
-        </div>
 
 
         <!--footer section start-->
-        <footer>
-            2020 &copy; 板凳宽宽毕设作品 </a>
+        <footer class="sticky-footer">
+            2022 &copy; 板凳宽宽毕设作品 </a>
         </footer>
         <!--footer section end-->
 
 
+    </div>
     </div>
     <!-- main content end-->
 </section>
@@ -251,8 +176,9 @@
 <script src="js/modernizr.min.js"></script>
 <script src="js/jquery.nicescroll.js"></script>
 
-<script type="text/javascript" src="js/jquery.validate.min.js"></script>
-<script src="js/validation-init.js"></script>
+<!--dropzone-->
+<script src="js/dropzone/dropzone.js"></script>
+
 
 <!--common scripts for all pages-->
 <script src="js/scripts.js"></script>

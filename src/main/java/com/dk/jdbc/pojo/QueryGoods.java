@@ -22,4 +22,7 @@ public class QueryGoods {
     private String goodsName; //商品名
     private String category; //商品类别
     private String date;     //时间类别
+
+    //后加
+    private String specificDate;  //年月日
 }

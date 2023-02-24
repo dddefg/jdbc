@@ -6,4 +6,14 @@
     <!-- mapper接口类名和映射文件的类名保持一致
          mapper接口的方法名要和映射文件sql的ID保持一致
      -->
-</mapper>   
+    <insert id="addBasicInformation">
+        insert into basic_information (goods_id,goods_name,category)
+        values (#{goodsId},#{goodsName},#{category})
+    </insert>
+    <delete id="deleteBasicInformation">
+        delete from basic_information where goods_name = #{goodsName}
+    </delete>
+    <select id="getListBasicInformations" resultType="com.dk.jdbc.pojo.BasicInformation">
+        select * from basic_information where goods_name LIKE #{goodsName}
+    </select>
+</mapper>

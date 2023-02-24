@@ -3,6 +3,7 @@ package com.dk.jdbc;
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
 import com.dk.jdbc.controller.UserController;
+import com.dk.jdbc.controller.warehousingAnalysis.WarehousingAnalysisController;
 import com.dk.jdbc.mapper.GoodsMapper;
 import com.dk.jdbc.mapper.IssueMapper;
 import com.dk.jdbc.mapper.StockMapper;
@@ -16,11 +17,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import java.io.*;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -185,15 +188,14 @@ LossService lossService;
     }
     @Autowired
     GoodsBasicInformationService goodsBasicInformationService;
-
+@Autowired
+    WarehousingAnalysisController warehousingAnalysisController;
     @Test
     public void aaa(){
-        Long l= Long.valueOf(1111);
-        Loss loss = new Loss(l, "l", "aa", "aa", 11, "a", "aa", date);
-//        boolean b = lossService.addLoss(loss);
-//        System.out.println(b);
-        boolean save = lossService.save(loss);
-
+        String s="苹果";
+        s="%"+s+"%";
+        List<BasicInformation> listBasicInformations = goodsBasicInformationService.getListBasicInformations(s);
+        System.out.println(listBasicInformations);
 
 
     }

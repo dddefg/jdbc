@@ -1,0 +1,67 @@
+<!-- dkk
+入库查询小页面
+-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+    <script>
+        function delblog(){
+        const ans = confirm("确认要删除？删除之后库存随之减少");
+        if (ans===false) {
+        event.preventDefault(); //取消默认应答
+        return false;
+    }else{
+        alert("正在删除")
+        return true
+    }
+    }
+</script>
+
+<body>
+<table border="1" style="margin: auto;width: 100%" cellspacing="0">
+    <tr>
+        <th colspan="11">基础信息查询
+            <form th:action="@{/InformationTable}" method="post">
+                  商品名称：
+                <input type="text" name="goodsName">
+                <input type="submit" value="查询">
+            </form>
+        </th>
+    </tr>
+    <tr>
+        <th>商品编号</th>
+        <th>商品名称</th>
+        <th>商品类别</th>
+        <th colspan="2">操作</th>
+    </tr>
+
+    <tr th:each="basicInformation:${BasicInformationAll.list}" style="text-align: center">
+        <td th:text="${basicInformation.goodsId}"></td>
+        <td th:text="${basicInformation.goodsName}"></td>
+        <td th:text="${basicInformation.category}"></td>
+        <th>
+           <a  th:onclick="delblog()"  th:href="@{'/deleteGoodsBasicInformation?goodsName='+${basicInformation.goodsName}}">删除</a>
+       <a   href="www.baidu.com">编辑</a>
+        </th>
+    </tr>
+    <td colspan="11">
+        <a th:if="${BasicInformationAll.hasPreviousPage}" th:href="@{/InformationTable?pn=1}">首页</a>
+        <a th:if="${BasicInformationAll.hasPreviousPage}" th:href="@{'/InformationTable?pn='+${BasicInformationAll.prePage}}">上一页</a>
+        <span th:each="num: ${BasicInformationAll.navigatepageNums}">
+        <a th:if="${BasicInformationAll.pageNum == num}" style="color: #FF4400" th:href="@{'/InformationTable?pn='+${num}}" th:text="'('+${num}+')'"></a>
+        <a th:if="${BasicInformationAll.pageNum != num}" th:href="@{'/InformationTable?pn='+${num}}" th:text="${num}"></a>
+    </span>
+            <a th:if="${BasicInformationAll.hasNextPage}" th:href="@{'/InformationTable?pn='+${BasicInformationAll.nextPage}}">下一页</a>
+        <a th:if="${BasicInformationAll.hasNextPage}" th:href="@{'/InformationTable?pn='+${BasicInformationAll.pages}}">尾页</a>
+        &nbsp;&nbsp;&nbsp;
+        当前总计[[${BasicInformationAll.total}]]条数据
+        &nbsp;&nbsp;&nbsp;
+        <a th:href="@{/downloadBasicInformation}">点击此处导出</a>
+    </td>
+</table>
+</body>
+
+</html>

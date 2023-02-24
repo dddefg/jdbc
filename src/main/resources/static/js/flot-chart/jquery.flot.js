@@ -1364,7 +1364,7 @@ Licensed under the MIT license.
 
                 var info = surface.getTextInfo(layer, t.label, font, null, maxWidth);
 
-                labelWidth = Math.max(labelWidth, info.width);
+                // labelWidth = Math.max(labelWidth, info.width);
                 labelHeight = Math.max(labelHeight, info.height);
             }
 
@@ -2110,7 +2110,7 @@ Licensed under the MIT license.
                     tick, x, y, halign, valign;
 
                 surface.removeText(layer);
-
+//注释
                 for (var i = 0; i < axis.ticks.length; ++i) {
 
                     tick = axis.ticks[i];

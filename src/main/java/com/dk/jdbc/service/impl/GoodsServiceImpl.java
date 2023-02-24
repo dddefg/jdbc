@@ -45,7 +45,20 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
         return goodsMapper.getGoodsCurve();
     }
 
+    @Override
+    public List<Goods> WarehousingAnalysisByName(String goodsName) {
+        return goodsMapper.WarehousingAnalysisByName(goodsName);
+    }
 
+    @Override
+    public List<Goods> monthWarehousingAnalysisByName(String goodsName,Date date) {
+        return goodsMapper.monthWarehousingAnalysisByName(goodsName,date);
+    }
+
+    @Override
+    public List<Goods> getNum365(Date date) {
+        return goodsMapper.getNum365(date);
+    }
 
 
 }

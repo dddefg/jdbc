@@ -65,7 +65,7 @@ public class GoodsInStock {
          * 按条件查询
          * 保存储存条件
          */
-
+        System.out.println("访问入库记录。。");
         if (queryGoods.getOrderId()!=null){   //如果不点分类提交，传入的参数就为null，就说明不用改变分类
             query.setOrderId(queryGoods.getOrderId());  //如果提交的为”“或其他的参数，就说明要改变查询查询条件
         }

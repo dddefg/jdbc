@@ -376,7 +376,7 @@ getIssueRanking(model);
         }
         }
 //出库趋势图
-        public void getIssueCurve(Model model){
+    public void getIssueCurve(Model model){
        List<Issue> issues = issueService.getIssueCurve();
             //一天的时间戳
             long tep = 86400000;

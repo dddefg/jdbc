@@ -3,6 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dk.jdbc.mapper.UserMapper">
+    <update id="updateUser">
+        update user SET
+password = #{password}
+ where username = #{username}
+    </update>
     <!-- mapper接口类名和映射文件的类名保持一致
          mapper接口的方法名要和映射文件sql的ID保持一致
      -->

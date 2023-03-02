@@ -26,7 +26,7 @@
 
     </select>
 
-
+<!--按条件查询-->
     <select id="getListGoods" resultType="com.dk.jdbc.pojo.Goods">
         select * from goods where 1=1
         <if test="orderId !='' and orderId !=null">
@@ -46,6 +46,7 @@
         </if>
         ORDER BY date DESC
     </select>
+<!--    统计入库花费-->
     <select id="getMoney" resultType="java.lang.Double">
         SELECT SUM(cost) FROM goods WHERE date = #{date}
     </select>
@@ -71,7 +72,7 @@
         GROUP BY
             date;
     </select>
-<!--    按月份查询商品每月销量  price为月份，借存在price-->
+<!--    按月份查询商品销量  price为月份，借存在price-->
     <select id="monthWarehousingAnalysisByName" resultType="com.dk.jdbc.pojo.Goods">
         SELECT
             sum(`num`) AS num,SUM(cost) AS cost,
@@ -80,6 +81,7 @@
         WHERE goods_name=#{goodsName} AND date > #{date}
         GROUP BY MONTH(date)
     </select>
+<!--    查询商品最近一年入库量，每周统计一次-->
     <select id="getNum365" resultType="com.dk.jdbc.pojo.Goods">
         SELECT
             SUM(num) AS num,
@@ -91,6 +93,31 @@
             WEEK(date)
         ORDER BY
             WEEK(date) DESC;
+    </select>
+<!--    统计本月入库量-->
+    <select id="sum30Num" resultType="java.lang.Double">
+        SELECT SUM(num) AS num FROM goods WHERE date >= #{date}
+        <if test="goodsName !='' and goodsName !=null">
+            and goods_name = #{goodsName}
+        </if>
+    </select>
+    <select id="getIssueRankingNum" resultType="com.dk.jdbc.pojo.Goods">
+        SELECT goods_name,SUM(num) AS num
+        FROM `goods`
+        WHERE  DATE_SUB(CURDATE(), INTERVAL 30 DAY) <![CDATA[<=]]> date(date) AND goods_name = #{goodsName}
+        GROUP BY goods_name
+    </select>
+    <select id="sortDayB" resultType="com.dk.jdbc.pojo.Goods">
+        SELECT SUM(num) AS num,goods_name FROM goods WHERE TO_DAYS(date) =TO_DAYS(now())
+        GROUP BY goods_name ORDER BY num DESC
+    </select>
+    <select id="sortMonthB" resultType="com.dk.jdbc.pojo.Goods">
+        SELECT SUM(num) AS num,goods_name FROM goods WHERE DATE_FORMAT( date, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
+        GROUP BY goods_name ORDER BY num DESC
+    </select>
+    <select id="sortYearB" resultType="com.dk.jdbc.pojo.Goods">
+        SELECT SUM(num) AS num,goods_name FROM goods WHERE  YEAR(date) = YEAR(NOW())
+        GROUP BY goods_name ORDER BY num DESC
     </select>
 
 </mapper>

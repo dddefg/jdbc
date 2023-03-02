@@ -78,7 +78,7 @@ public class UserController {
         User user1 = userService.getUser(user.getUsername());
         if (user1 != null){
             model.addAttribute("increaseUser","账号已存在请重新输入");
-            return "/user/registered";
+            return "user/registered";
         }
         userService.addUser(user);
         model.addAttribute("msg", "注册成功请登录");
@@ -90,26 +90,27 @@ public class UserController {
     public String login(User user, HttpSession session,Model model,RedirectAttributes redirectAttributes){
         User loginUser = userService.getUser(user.getUsername());
         if (user.getUsername() == null){
-            return "/login";
+            return "login";
         }
-        if (loginUser!=null){
-            if (user.getUsername().equals(loginUser.getUsername())
-                    && user.getPassword().equals(loginUser.getPassword())){
-                //登录改成把用户保存起来
-                session.setAttribute("loginUser", user);
-                redirectAttributes.addAttribute("username", user.getUsername());
-                //登录成功重定向到index.html
-                return "redirect:/index";
-            }else {
-                model.addAttribute("msg", "密码错误");
+            if (loginUser != null) {
+                if (user.getUsername().equals(loginUser.getUsername())
+                        && user.getPassword().equals(loginUser.getPassword())) {
+                    //登录改成把用户保存起来
+                    session.setAttribute("loginUser", user);
+                    redirectAttributes.addAttribute("username", user.getUsername());
+                    //登录成功重定向到index.html
+                    return "redirect:/index";
+                } else {
+                    model.addAttribute("msg", "密码错误");
+                    //回到登录界面
+                    return "login";
+                }
+            } else {
+                model.addAttribute("msg", "账号不存在。master");
                 //回到登录界面
                 return "login";
             }
-        }else {
-            model.addAttribute("msg", "账号不存在。master");
-            //回到登录界面
-            return "login";
-        }
+
     }
 
     @GetMapping("/loginOut")
@@ -156,7 +157,8 @@ public class UserController {
         /**
          * 滞销数量
          */
-        model.addAttribute("unsalableNum",unsalableNum());
+        int num = unsalableNum();
+        model.addAttribute("unsalableNum",num);
         /**
          * 库存不足数量
          */
@@ -196,13 +198,13 @@ public class UserController {
 getIssueRanking(model);
 
         //跳转首页index.html
-        return "/index";
+        return "index";
     }
 
     @GetMapping("/registered")
     public String registered(){
         //跳转注册registered.html
-        return "/user/registered";
+        return "user/registered";
     }
 
     //出库入库退货损耗报备饼图比例
@@ -263,7 +265,13 @@ getIssueRanking(model);
             //如果出库日期为空
             if (stock.getLastIssueDate() == null){
                 //如果一个商品从未出库，且入库时间已经超过7天，并且库存大于100 判断为滞销商品
-                Long i = (date.getTime() - stock.getLastPurchaseDate().getTime())/(1000 * 60 * 60 * 24);
+                Long i= Long.valueOf(0);
+                try {
+                   i = (date.getTime() - stock.getLastPurchaseDate().getTime())/(1000 * 60 * 60 * 24);
+                }catch (Exception e){
+                    System.out.println(e);
+                }
+
                 if (i > 7 && stock.getNum() > 100 ){
                     num++;
                 }
@@ -328,7 +336,7 @@ getIssueRanking(model);
 
     @RequestMapping("/index11")
     public String index11(){
-        return "/index11";
+        return "index11";
     }
 
 
@@ -431,8 +439,6 @@ getIssueRanking(model);
                 BigDecimal bigDecimal = new BigDecimal(width);
                 //只保留两位小数
                 double f1 = bigDecimal.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-
-                System.out.println("宽"+width);
                 mode.addAttribute("RankingName"+i,issuesList.get(i).getGoodsName());
                 mode.addAttribute("RankingCost"+i,issuesList.get(i).getCost());
                 mode.addAttribute("RankingNum"+i,f1);

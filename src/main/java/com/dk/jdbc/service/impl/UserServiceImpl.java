@@ -26,5 +26,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         userMapper.addUser(user);
     }
 
+    @Override
+    public boolean updateUser(User loginUser) {
+        return userMapper.updateUser(loginUser);
+    }
+
 
 }

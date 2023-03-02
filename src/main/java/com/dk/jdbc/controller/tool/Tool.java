@@ -1,12 +1,19 @@
 package com.dk.jdbc.controller.tool;
 
+import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.ExcelImportUtil;
+import cn.afterturn.easypoi.excel.entity.ExportParams;
 import cn.afterturn.easypoi.excel.entity.ImportParams;
 import com.dk.jdbc.controller.CommodityManagement.CommodityManagementController;
 import com.dk.jdbc.controller.CommodityManagement.GoodsIssue;
 import com.dk.jdbc.controller.CommodityManagement.GoodsLoss;
 import com.dk.jdbc.controller.CommodityManagement.GoodsReturn;
 import com.dk.jdbc.pojo.*;
+import com.dk.jdbc.service.GoodsService;
+import com.dk.jdbc.service.IssueService;
+import com.dk.jdbc.service.LossService;
+import com.dk.jdbc.service.ReturnService;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -21,10 +28,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
-
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -168,5 +177,72 @@ public class Tool {
         return "redirect:/ToGoodsReturn";
     }
 
+    @RequestMapping("/test")
+    public void test(@RequestHeader Map<String, String> header){
+        String s = header.get("referer");
+    }
+
+    @Autowired
+    GoodsService goodsService;
+    @Autowired
+    ReturnService returnService;
+    @Autowired
+    LossService lossService;
+    @Autowired
+    IssueService issueService;
+    QueryGoods query=new QueryGoods();
+    //下载数据
+    @RequestMapping("/downloadExcel")
+    ResponseEntity<byte[]> downloadExcel(@RequestHeader Map<String, String> header) throws IOException {
+        String s = header.get("referer"); //获取访问路径
+        //生成当前时间，把当前时间作为文件名
+        Date date = new Date();
+        SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss");
+        String format = dateFormat.format(date);
+
+        String src="商品入库表"+format+".xls";
+
+
+        int aReturn = s.indexOf("return");
+        Workbook workbook = null;
+        //下载退货数据
+        if (aReturn >= 0){
+            List<Return> returns = returnService.listA();
+            workbook = ExcelExportUtil.exportExcel(new ExportParams("退货信息", "退货表"), Return.class, returns);
+        }
+        int loss = s.indexOf("loss");
+        if (loss >= 0){
+            List<Loss> list = lossService.list();
+            workbook = ExcelExportUtil.exportExcel(new ExportParams("报备信息", "报备表"), Loss.class, list);
+        }
+        int issue = s.indexOf("outbound");
+        if (issue >= 0){
+            List<Issue> list = issueService.list();
+            workbook = ExcelExportUtil.exportExcel(new ExportParams("出库信息", "出库表"), Issue.class, list);
+        }
+
+
+
+
+
+
+        //生成Excel数据
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        try {
+            workbook.write(bos);
+        }finally {
+            bos.close();
+        }
+        byte[] bytes1 = bos.toByteArray();
+        //创建HttpHeaders对象设置响应头信息
+        MultiValueMap<String, String> headers = new HttpHeaders();
+        //设置要下载方式以及下载文件的名字
+        headers.add("Content-Disposition", "attachment;filename="+src);
+        //设置响应状态码
+        HttpStatus statusCode = HttpStatus.OK;
+        //创建ResponseEntity对象
+        ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(bytes1, headers,statusCode);
+        return responseEntity;
+    }
 
 }

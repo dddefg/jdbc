@@ -12,4 +12,6 @@ public interface UserMapper extends BaseMapper<User> {
     User getUser(String username);
 
     void addUser(User user);
+
+    boolean updateUser(User loginUser);
 }

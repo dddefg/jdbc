@@ -15,6 +15,8 @@ import java.util.List;
 public interface GoodsMapper extends BaseMapper<Goods> {
 
 
+
+
     boolean addPurchase(Goods goods);
 
 
@@ -32,4 +34,13 @@ public interface GoodsMapper extends BaseMapper<Goods> {
     List<Goods> monthWarehousingAnalysisByName(String goodsName,Date date);
 
     List<Goods> getNum365(Date date);
+
+    double sum30Num(QueryGoods queryGoods);
+
+    Goods getIssueRankingNum(String goodsName);
+    List<Goods> sortDayB();
+
+    List<Goods> sortMonthB();
+
+    List<Goods> sortYearB();
 }

@@ -25,4 +25,10 @@ public class QueryGoods {
 
     //后加
     private String specificDate;  //年月日
+
+    //出库条件
+    private String issueId;  //出库编号
+    private String distributorName; //经销商名
+    private String issueDate; //出库时间
+    private String issuePrice; //出库价格
 }

@@ -1,0 +1,84 @@
+<!-- dkk
+入库查询小页面
+-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+    <script>
+        function delblog(){
+        const ans = confirm("确认要删除？删除之后库存随之减少");
+        if (ans===false) {
+        event.preventDefault(); //取消默认应答
+        return false;
+    }else{
+        alert("正在删除")
+        return true
+    }
+    }
+</script>
+
+<body>
+<table border="1" style="margin: auto;width: 100%" cellspacing="0">
+    <tr>
+        <th colspan="11">出库查询
+            <form th:action="@{/outboundList}" method="post">
+                 出库编号：
+                <input type="text" name="issueId" th:value="${issueIdText}">
+                 客户名称：
+                <input type="text" name="distributorName" th:value="${issueDistributorNameText}">
+                  商品名称：
+                <input type="text" name="goodsName" th:value="${issueGoodsNameText}">
+                 商品类别:
+                <input type="text" name="category" th:value="${issueCategoryText}">
+                日期:
+                <input type="Date" name="issueDate" th:value="${issueDateText}">
+                <input type="submit" value="查询">
+            </form>
+        </th>
+    </tr>
+    <tr>
+        <th>出库编号</th>
+        <th>客户名称</th>
+        <th>商品编号</th>
+        <th>商品名称</th>
+        <th>商品类别</th>
+        <th>单价</th>
+        <th>数量</th>
+        <th>价格单位</th>
+        <th>总计</th>
+        <th>出库日期</th>
+    </tr>
+
+    <tr th:each="issue:${issueAll.list}" style="text-align: center">
+        <td th:text="${issue.issueId}" ></td>
+        <td th:text="${issue.distributorName}"></td>
+        <td th:text="${issue.goodsId}"></td>
+        <td th:text="${issue.goodsName}"></td>
+        <td th:text="${issue.category}"></td>
+        <td th:text="${issue.issuePrice}"></td>
+        <td th:text="${issue.num}"></td>
+        <td th:text="${issue.unit}"></td>
+        <td th:text="${issue.cost}"></td>
+        <td th:text="${issue.issueDate}"></td>
+    </tr>
+    <td colspan="11">
+        <a th:if="${issueAll.hasPreviousPage}" th:href="@{/outboundList?pn=1}">首页</a>
+        <a th:if="${issueAll.hasPreviousPage}" th:href="@{'/outboundList?pn='+${issueAll.prePage}}">上一页</a>
+        <span th:each="num: ${issueAll.navigatepageNums}">
+        <a th:if="${issueAll.pageNum == num}" style="color: #FF4400" th:href="@{'/outboundList?pn='+${num}}" th:text="'('+${num}+')'"></a>
+        <a th:if="${issueAll.pageNum != num}" th:href="@{'/outboundList?pn='+${num}}" th:text="${num}"></a>
+    </span>
+            <a th:if="${issueAll.hasNextPage}" th:href="@{'/outboundList?pn='+${issueAll.nextPage}}">下一页</a>
+        <a th:if="${issueAll.hasNextPage}" th:href="@{'/outboundList?pn='+${issueAll.pages}}">尾页</a>
+        &nbsp;&nbsp;&nbsp;
+        当前总计[[${issueAll.total}]]条数据
+        &nbsp;&nbsp;&nbsp;
+        <a th:href="@{/downloadExcel}">点击此处导出</a>
+    </td>
+</table>
+</body>
+
+</html>

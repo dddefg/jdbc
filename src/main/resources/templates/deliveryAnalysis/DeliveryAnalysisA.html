@@ -5,27 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <meta name="description" content="">
   <meta name="author" content="ThemeBucket">
-  <link rel="shortcut icon" href="#" type="image/png">
+<!--  -->
 
-  <title>Chartjs</title>
+  <title>类别分析</title>
 
   <link href="css/style.css" rel="stylesheet">
   <link href="css/style-responsive.css" rel="stylesheet">
 
-  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!--[if lt IE 9]>
+
   <script src="js/html5shiv.js"></script>
   <script src="js/respond.min.js"></script>
-  <![endif]-->
+<!--出库分析-->
 </head>
-
+<style>
+    .text1{
+        position: relative;
+    }
+    .text-top{
+        position: absolute;
+        top: 45px;
+        left: 40px;
+    }
+</style>
 <body class="sticky-header">
 
 <section>
-    <!-- left side start-->
+
     <div class="left-side sticky-left-side">
 
-        <!--logo and iconic logo start-->
         <div class="logo">
             <a href="index.html"><img src="images/logo1.png" alt=""></a>
         </div>
@@ -33,46 +40,14 @@
         <div class="logo-icon text-center">
             <a href="index.html"><img src="images/logo_icon.png" alt=""></a>
         </div>
-        <!--logo and iconic logo end-->
-
 
         <div class="left-side-inner">
 
-            <!-- visible to small devices only -->
-            <div class="visible-xs hidden-sm hidden-md hidden-lg">
-                <div class="media logged-user">
-                    <img alt="" src="images/photos/user-avatar.png" class="media-object">
-                    <div class="media-body">
-                        <h4><a href="#">John Doe</a></h4>
-                        <span>"Hello There..."</span>
-                    </div>
-                </div>
-
-                <h5 class="left-nav-title">Account Information</h5>
-                <ul class="nav nav-pills nav-stacked custom-nav">
-                    <li><a href="#"><i class="fa fa-user"></i> <span>Profile</span></a></li>
-                    <li><a href="#"><i class="fa fa-cog"></i> <span>Settings</span></a></li>
-                    <li><a href="#"><i class="fa fa-sign-out"></i> <span>Sign Out</span></a></li>
-                </ul>
-            </div>
-
-            <!--sidebar nav start-->
             <ul class="nav nav-pills nav-stacked custom-nav">
                 <li><a href="index.html"><i class="fa fa-home"></i> <span>主页</span></a></li>
 
-                <li class="menu-list"><a href=""><i class="fa fa-cogs"></i> <span>设置</span></a>
-                    <ul class="sub-menu-list">
-                        <li><a href="grids.html"> Grids</a></li>
-                        <li><a href="gallery.html"> Media Gallery</a></li>
-                        <li><a href="calendar.html"> Calendar</a></li>
-                        <li><a href="tree_view.html"> Tree View</a></li>
-                        <li><a href="nestable.html"> Nestable</a></li>
 
-                    </ul>
                 </li>
-
-
-
 
 
                 <li class="menu-list"><a href=""><i class="fa fa-tasks"></i> <span>商品管理</span></a>
@@ -83,267 +58,73 @@
                         <li><a th:href="@{/ToGoodsLoss}"> 商品损耗报备</a></li>
                         <li><a th:href="@{/ToBasicInformation}">商品基本信息</a></li>                     </ul>
                 </li>
-                <li class="menu-list"><a href=""><i class="fa fa-bar-chart-o"></i> <span>入库记录</span></a>
+                               <li class="menu-list"><a href=""><i class="fa fa-bar-chart-o"></i> <span>入库分析</span></a>
                     <ul class="sub-menu-list">
                         <li><a th:href="@{/ToGoodsInStock}"> 商品入库记录</a></li>
                         <li><a th:href="@{/ToWarehousingAnalysis}"> 入库分析</a></li>
-                        <li><a href="morris.html"> Morris Charts</a></li>
-                        <li><a href="chartjs.html"> Chartjs</a></li>
-                        <li><a href="c3chart.html"> C3 Charts</a></li>
+                        <li><a th:href="@{warehousingRankingList}"> 入库排行榜</a></li>
+
                     </ul>
                 </li>
-                <li class="menu-list nav-active"><a href="#"><i class="fa fa-th-list"></i> <span>出库记录</span></a>
+                <li class="menu-list nav-active"><a href="#"><i class="fa fa-th-list"></i> <span>出库分析</span></a>
                     <ul class="sub-menu-list">
-                        <li><a th:href="@{/toOutboundGoods}">商品出库查询</a></li>
-                        <li><a th:href="@{/toDeliveryAnalysis}">商品出库分析</a></li>
-                        <li><a href="responsive_table.html"> Responsive Table</a></li>
-                        <li><a href="editable_table.html"> Edit Table</a></li>
-                    </ul>
+                        <li><a th:href="@{/toOutboundGoods}">商品出库记录</a></li>
+                        <li><a th:href="@{/toDeliveryAnalysis}">类别分析</a></li>
+                        <li><a th:href="@{toSingleIssue}"> 单品分析</a></li>
+                       <li><a th:href="@{toOutboundRankingList}"> 出库排行榜</a></li>                    </ul>
                 </li>
 
 
 
-                <li><a th:href="@{/loginOut}"><i class="fa fa-sign-in"></i> <span>退出登录</span></a></li>
+                <li class="menu-list"><a href=""><i class="fa fa-file-text"></i> <span>其他记录</span></a>
+                    <ul class="sub-menu-list">
+                        <li ><a th:href="@{/toReturnGoods}">退货查询</a></li>
+                        <li ><a th:href="@{/toLossGoods}">损耗报备查询</a></li>
+                    </ul>
+                <li class="menu-list"><a href=""><i class="fa fa-cogs"></i> <span>设置</span></a>
+                    <ul class="sub-menu-list">
+                        <li ><a th:href="@{/toRevisePass}"> 修改密码</a></li>
+                    </ul>
+                </li></li><li><a th:href="@{/loginOut}"><i class="fa fa-sign-in"></i> <span>退出登录</span></a></li>
 
             </ul>
-            <!--sidebar nav end-->
 
         </div>
     </div>
-    <!-- left side end-->
-    
-    <!-- main content start-->
+
     <div class="main-content" >
 
-        <!-- header section start-->
-        <div class="header-section">
 
-        <!--toggle button start-->
-        <a class="toggle-btn"><i class="fa fa-bars"></i></a>
-        <!--toggle button end-->
+        <div th:replace="common :: #header"></div>
 
-        <!--search start-->
-        <form class="searchform" action="index.html" method="post">
-            <input type="text" class="form-control" name="keyword" placeholder="Search here..." />
-        </form>
-        <!--search end-->
-
-        <!--notification menu start -->
-        <div class="menu-right">
-            <ul class="notification-menu">
-                <li>
-                    <a href="#" class="btn btn-default dropdown-toggle info-number" data-toggle="dropdown">
-                        <i class="fa fa-tasks"></i>
-                        <span class="badge">8</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-head pull-right">
-                        <h5 class="title">You have 8 pending task</h5>
-                        <ul class="dropdown-list user-list">
-                            <li class="new">
-                                <a href="#">
-                                    <div class="task-info">
-                                        <div>Database update</div>
-                                    </div>
-                                    <div class="progress progress-striped">
-                                        <div style="width: 40%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-warning">
-                                            <span class="">40%</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="new">
-                                <a href="#">
-                                    <div class="task-info">
-                                        <div>Dashboard done</div>
-                                    </div>
-                                    <div class="progress progress-striped">
-                                        <div style="width: 90%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="90" role="progressbar" class="progress-bar progress-bar-success">
-                                            <span class="">90%</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div class="task-info">
-                                        <div>Web Development</div>
-                                    </div>
-                                    <div class="progress progress-striped">
-                                        <div style="width: 66%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="66" role="progressbar" class="progress-bar progress-bar-info">
-                                            <span class="">66% </span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div class="task-info">
-                                        <div>Mobile App</div>
-                                    </div>
-                                    <div class="progress progress-striped">
-                                        <div style="width: 33%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="33" role="progressbar" class="progress-bar progress-bar-danger">
-                                            <span class="">33% </span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div class="task-info">
-                                        <div>Issues fixed</div>
-                                    </div>
-                                    <div class="progress progress-striped">
-                                        <div style="width: 80%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="80" role="progressbar" class="progress-bar">
-                                            <span class="">80% </span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="new"><a href="">See All Pending Task</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <a href="#" class="btn btn-default dropdown-toggle info-number" data-toggle="dropdown">
-                        <i class="fa fa-envelope-o"></i>
-                        <span class="badge">5</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-head pull-right">
-                        <h5 class="title">You have 5 Mails </h5>
-                        <ul class="dropdown-list normal-list">
-                            <li class="new">
-                                <a href="">
-                                    <span class="thumb"><img src="images/photos/user1.png" alt="" /></span>
-                                        <span class="desc">
-                                          <span class="name">John Doe <span class="badge badge-success">new</span></span>
-                                          <span class="msg">Lorem ipsum dolor sit amet...</span>
-                                        </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <span class="thumb"><img src="images/photos/user2.png" alt="" /></span>
-                                        <span class="desc">
-                                          <span class="name">Jonathan Smith</span>
-                                          <span class="msg">Lorem ipsum dolor sit amet...</span>
-                                        </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <span class="thumb"><img src="images/photos/user3.png" alt="" /></span>
-                                        <span class="desc">
-                                          <span class="name">Jane Doe</span>
-                                          <span class="msg">Lorem ipsum dolor sit amet...</span>
-                                        </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <span class="thumb"><img src="images/photos/user4.png" alt="" /></span>
-                                        <span class="desc">
-                                          <span class="name">Mark Henry</span>
-                                          <span class="msg">Lorem ipsum dolor sit amet...</span>
-                                        </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <span class="thumb"><img src="images/photos/user5.png" alt="" /></span>
-                                        <span class="desc">
-                                          <span class="name">Jim Doe</span>
-                                          <span class="msg">Lorem ipsum dolor sit amet...</span>
-                                        </span>
-                                </a>
-                            </li>
-                            <li class="new"><a href="">Read All Mails</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <a href="#" class="btn btn-default dropdown-toggle info-number" data-toggle="dropdown">
-                        <i class="fa fa-bell-o"></i>
-                        <span class="badge">4</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-head pull-right">
-                        <h5 class="title">Notifications</h5>
-                        <ul class="dropdown-list normal-list">
-                            <li class="new">
-                                <a href="">
-                                    <span class="label label-danger"><i class="fa fa-bolt"></i></span>
-                                    <span class="name">Server #1 overloaded.  </span>
-                                    <em class="small">34 mins</em>
-                                </a>
-                            </li>
-                            <li class="new">
-                                <a href="">
-                                    <span class="label label-danger"><i class="fa fa-bolt"></i></span>
-                                    <span class="name">Server #3 overloaded.  </span>
-                                    <em class="small">1 hrs</em>
-                                </a>
-                            </li>
-                            <li class="new">
-                                <a href="">
-                                    <span class="label label-danger"><i class="fa fa-bolt"></i></span>
-                                    <span class="name">Server #5 overloaded.  </span>
-                                    <em class="small">4 hrs</em>
-                                </a>
-                            </li>
-                            <li class="new">
-                                <a href="">
-                                    <span class="label label-danger"><i class="fa fa-bolt"></i></span>
-                                    <span class="name">Server #31 overloaded.  </span>
-                                    <em class="small">4 hrs</em>
-                                </a>
-                            </li>
-                            <li class="new"><a href="">See All Notifications</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        <img src="images/photos/user-avatar.png" alt="" />
-                        John Doe
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
-                        <li><a href="#"><i class="fa fa-user"></i>  Profile</a></li>
-                        <li><a href="#"><i class="fa fa-cog"></i>  Settings</a></li>
-                        <li><a href="#"><i class="fa fa-sign-out"></i> Log Out</a></li>
-                    </ul>
-                </li>
-
-            </ul>
-        </div>
-        <!--notification menu end -->
-
-        </div>
-        <!-- header section end-->
-
-        <!-- page heading start-->
         <div class="page-heading">
             <h3>
-                Chartjs
+                类别分析
             </h3>
             <ul class="breadcrumb">
                 <li>
-                    <a href="#">Charts</a>
+                    <a href="#">出库分析</a>
                 </li>
-                <li class="active"> Chartjs </li>
+                <li class="active"> 类别分析 </li>
             </ul>
         </div>
-        <!-- page heading end-->
 
-        <!--body wrapper start-->
         <div class="wrapper">
             <div class="row">
                 <div class="col-sm-6">
                     <section class="panel">
                         <header class="panel-heading">
-                            Pie Chart
+                            <a style="color:#6dc5a3 ">库存[[${DeliveryAnalysisText}]]总量：[[${numStock}]]</a> /
+                            <a style="color:#b8d3f5 ">本月[[${DeliveryAnalysisText}]]入库量：[[${numGoods}]]</a>/
+                            <a style="color:#5f728f ">本月[[${DeliveryAnalysisText}]]出库量：[[${numIssue}]]</a>
+                                <form th:action="@{/toDeliveryAnalysis}" method="post">
+                                    商品名称：
+                                <input type="text" name="goodsName" th:value="${DeliveryAnalysisText}">
+                                <input type="submit" value="查询">
+                            </form>
                         <span class="tools pull-right">
-                            <a href="javascript:;" class="fa fa-chevron-down"></a>
-                            <a href="javascript:;" class="fa fa-times"></a>
+<!--                            <a href="javascript:;" class="fa fa-chevron-down"></a>-->
+<!--                         -->
                          </span>
                         </header>
                         <div class="panel-body">
@@ -357,14 +138,32 @@
                 <div class="col-sm-6">
                     <section class="panel">
                         <header class="panel-heading">
-                            Donut Chart
+                            本月出库各类别比例
                          <span class="tools pull-right">
-                            <a href="javascript:;" class="fa fa-chevron-down"></a>
-                            <a href="javascript:;" class="fa fa-times"></a>
+<!--                            <a href="javascript:;" class="fa fa-chevron-down"></a>-->
+<!--                         -->
                          </span>
                         </header>
                         <div class="panel-body">
-                            <div class="chartJS">
+                            <div class="chartJS" >
+                                <div class="text-top">
+                                <h6 th:if="${donutDataNum0 != 0}" style="color: #BBFFFF">[[${donutDataNumCategory0}]]:[[${donutDataNum0}]]</h6>
+                                <h6 th:if="${donutDataNum1 != 0}" style="color: #FFDAB9">[[${donutDataNumCategory1}]]:[[${donutDataNum1}]]</h6>
+                                <h6 th:if="${donutDataNum2 != 0}" style="color: #668B8B">[[${donutDataNumCategory2}]]:[[${donutDataNum2}]]</h6>
+                                <h6 th:if="${donutDataNum3 != 0}" style="color: #E6E6FA">[[${donutDataNumCategory3}]]:[[${donutDataNum3}]]</h6>
+                                <h6 th:if="${donutDataNum4 != 0}" style="color: #00CDCD">[[${donutDataNumCategory4}]]:[[${donutDataNum4}]]</h6>
+                                <h6 th:if="${donutDataNum5 != 0}" style="color: #7FFFD4">[[${donutDataNumCategory5}]]:[[${donutDataNum5}]]</h6>
+                                <h6 th:if="${donutDataNum6 != 0}" style="color: #F0FFFF">[[${donutDataNumCategory6}]]:[[${donutDataNum6}]]</h6>
+                                <h6 th:if="${donutDataNum7 != 0}" style="color: #C1FFC1">[[${donutDataNumCategory7}]]:[[${donutDataNum7}]]</h6>
+                                <h6 th:if="${donutDataNum8 != 0}" style="color: #6495ED">[[${donutDataNumCategory8}]]:[[${donutDataNum8}]]</h6>
+                                <h6 th:if="${donutDataNum9 != 0}" style="color: #00FF7F">[[${donutDataNumCategory9}]]:[[${donutDataNum9}]]</h6>
+                                <h6 th:if="${donutDataNum10 != 0}" style="color: #00BFFF">[[${donutDataNumCategory10}]]:[[${donutDataNum10}]]</h6>
+                                <h6 th:if="${donutDataNum11 != 0}" style="color: #00FFFF">[[${donutDataNumCategory11}]]:[[${donutDataNum11}]]</h6>
+                                <h6 th:if="${donutDataNum12 != 0}" style="color: #CDC673">[[${donutDataNumCategory12}]]:[[${donutDataNum12}]]</h6>
+                                <h6 th:if="${donutDataNum13 != 0}"  style="color: #3CB371">[[${donutDataNumCategory13}]]:[[${donutDataNum13}]]</h6>
+                                <h6 th:if="${donutDataNum14 != 0}" style="color: #FFC1C1">[[${donutDataNumCategory14}]]:[[${donutDataNum14}]]</h6>
+                                </div>
+
                                 <canvas id="donut-chart-js" height="250" width="800" ></canvas>
                             </div>
                         </div>
@@ -375,10 +174,11 @@
                 <div class="col-sm-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            Bar Chart
+                            本月销售量前七
+                             <a style="color: #2a323f">  数量</a>/
+                             <a style="color: #6dc5a3">  销售额</a>
                          <span class="tools pull-right">
                             <a href="javascript:;" class="fa fa-chevron-down"></a>
-                            <a href="javascript:;" class="fa fa-times"></a>
                          </span>
                         </header>
                         <div class="panel-body">
@@ -393,10 +193,11 @@
                 <div class="col-sm-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            Area Chart
+                            销售类别前三趋势图<a style="color:#6dc5a3">/ [[${lineDataName0}]]</a>
+                            <a style="color:#00F5FF">/ [[${lineDataName1}]]</a>
+                            <a style="color:#FFDAB9">/ [[${lineDataName2}]]</a>
                         <span class="tools pull-right">
                             <a href="javascript:;" class="fa fa-chevron-down"></a>
-                            <a href="javascript:;" class="fa fa-times"></a>
                          </span>
                         </header>
                         <div class="panel-body">
@@ -408,20 +209,15 @@
                 </div>
             </div>
         </div>
-        <!--body wrapper end-->
 
-        <!--footer section start-->
         <footer>
-            2020 &copy; AdminEx by ThemeBucket </a>
+            2023 &copy; 板凳宽宽毕设作品 </a>
         </footer>
-        <!--footer section end-->
-
 
     </div>
-    <!-- main content end-->
+
 </section>
 
-<!-- Placed js at the end of the document so the pages load faster -->
 <script src="js/jquery-1.10.2.min.js"></script>
 <script src="js/jquery-ui-1.9.2.custom.min.js"></script>
 <script src="js/jquery-migrate-1.2.1.min.js"></script>
@@ -433,8 +229,224 @@
 <script src="js/chart-js/Chart.js"></script>
 <script src="js/chart-js/chartjs.init.js"></script>
 
-<!--common scripts for all pages-->
 <script src="js/scripts.js"></script>
+<script>
+    (function(){
+        var t;
+        function size(animate){
+            if (animate == undefined){
+                animate = false;
+            }
+            clearTimeout(t);
+            t = setTimeout(function(){
+                $("canvas").each(function(i,el){
+                    $(el).attr({
+                        "width":$(el).parent().width(),
+                        "height":$(el).parent().outerHeight()
+                    });
+                });
+                redraw(animate);
+                var m = 0;
+                $(".chartJS").height("");
+                $(".chartJS").each(function(i,el){ m = Math.max(m,$(el).height()); });
+                $(".chartJS").height(m);
+            }, 30);
+        }
+        $(window).on('resize', function(){ size(false); });
 
+
+        function redraw(animation){
+            var options = {};
+            if (!animation){
+                options.animation = false;
+            } else {
+                options.animation = true;
+            }
+
+
+            var barChartData = {
+                labels : ["[[${barChartDataName0}]]","[[${barChartDataName1}]]","[[${barChartDataName2}]]",
+                    "[[${barChartDataName3}]]","[[${barChartDataName4}]]","[[${barChartDataName5}]]","[[${barChartDataName6}]]"],
+                datasets : [
+                    {
+                        fillColor : "#2a323f",
+                        strokeColor : "#2a323f",
+                        data :
+                            ['[[${barChartDataNum0}]]','[[${barChartDataNum1}]]','[[${barChartDataNum2}]]',
+                            '[[${barChartDataNum3}]]','[[${barChartDataNum4}]]','[[${barChartDataNum5}]]',
+                            '[[${barChartDataNum6}]]']
+                    },
+                    {
+                        fillColor : "#6dc5a3",
+                        strokeColor : "#6dc5a3",
+                        data :
+                            ['[[${barChartDataCost0}]]','[[${barChartDataCost1}]]','[[${barChartDataCost2}]]',
+                            '[[${barChartDataCost3}]]','[[${barChartDataCost4}]]','[[${barChartDataCost5}]]',
+                            '[[${barChartDataCost6}]]']
+                    }
+                ]
+
+            }
+
+            var myLine = new Chart(document.getElementById("bar-chart-js").getContext("2d")).Bar(barChartData);
+
+            var Linedata = {
+                labels : ['[[${lineData6}]]','[[${lineData5}]]','[[${lineData4}]]','[[${lineData3}]]',
+                    '[[${lineData2}]]','[[${lineData1}]]','[[${lineData0}]]'],
+                datasets : [
+                    {
+                        fillColor : "#00000000",
+                        strokeColor : "#6dc5a3",
+                        pointColor : "#6dc5a3",
+                        pointStrokeColor : "#fff",
+                        data : ['[[${lineDataNum60}]]','[[${lineDataNum50}]]','[[${lineDataNum40}]]',
+                            '[[${lineDataNum30}]]','[[${lineDataNum20}]]','[[${lineDataNum10}]]',
+                            '[[${lineDataNum00}]]']
+                    },
+                    {
+                        fillColor : "#00000000",
+                        strokeColor : "#00F5FF",
+                        pointColor : "#00F5FF",
+                        pointStrokeColor : "#fff",
+                        data : ['[[${lineDataNum61}]]','[[${lineDataNum51}]]','[[${lineDataNum41}]]',
+                            '[[${lineDataNum31}]]','[[${lineDataNum21}]]','[[${lineDataNum11}]]',
+                            '[[${lineDataNum01}]]']
+                    },
+                    {
+                        fillColor : "#00000000",
+                        strokeColor : "#FFDAB9",
+                        pointColor : "#FFDAB9",
+                        pointStrokeColor : "#fff",
+                        data : ['[[${lineDataNum62}]]','[[${lineDataNum52}]]','[[${lineDataNum42}]]',
+                            '[[${lineDataNum32}]]','[[${lineDataNum22}]]','[[${lineDataNum12}]]',
+                            '[[${lineDataNum02}]]']
+                    }
+
+                ]
+            }
+            var myLineChart = new Chart(document.getElementById("line-chart-js").getContext("2d")).Line(Linedata);
+
+
+            var pieData = [
+                {
+                    value: [[${numGoods}]],
+                    color:"#b8d3f5"
+                },
+                {
+                    value : [[${numIssue}]],
+                    color : "#5f728f"
+                },
+                {
+                    value : [[${numStock}]],
+                    color : "#6dc5a3"
+                }
+
+            ];
+
+            var myPie = new Chart(document.getElementById("pie-chart-js").getContext("2d")).Pie(pieData);
+
+
+
+            var donutData = []
+            for (let i=0; i<[[${donutDataSize}]]; i++){
+                if (i==1) {
+                    donutData.push({
+                        value: [[${donutDataNum1}]],
+                        color: "#FFDAB9"
+                    })
+                }else if(i==0){
+                    donutData.push({
+                        value: [[${donutDataNum0}]],
+                        color: "#BBFFFF"
+                    })
+                }
+                else if(i==2) {
+                    donutData.push({
+                        value: [[${donutDataNum2}]],
+                        color: "#668B8B"
+                    })
+                }else if(i==3) {
+                    donutData.push({
+                        value: [[${donutDataNum3}]],
+                        color: "#E6E6FA"
+                    })
+                }
+                else if(i==4){
+                    donutData.push({
+                        value: [[${donutDataNum4}]],
+                        color: "#00CDCD"
+                    })
+                }else if(i==5){
+                    donutData.push({
+                        value: [[${donutDataNum5}]],
+                        color: "#7FFFD4"
+                    })
+                }else if(i==6){
+                    donutData.push({
+                        value: [[${donutDataNum6}]],
+                        color: "#F0FFFF"
+                    })
+                }else if(i==7){
+                    donutData.push({
+                        value: [[${donutDataNum7}]],
+                        color: "#C1FFC1"
+                    })
+                }else if(i==8){
+                    donutData.push({
+                        value: [[${donutDataNum8}]],
+                        color: "#6495ED"
+                    })
+                }else if(i==9){
+                    donutData.push({
+                        value: [[${donutDataNum9}]],
+                        color: "#00FF7F"
+                    })
+                }else if(i==10){
+                    donutData.push({
+                        value: [[${donutDataNum10}]],
+                        color: "#00BFFF"
+                    })
+                }else if(i==11){
+                    donutData.push({
+                        value: [[${donutDataNum11}]],
+                        color: "#00FFFF"
+                    })
+                }else if(i==12){
+                    donutData.push({
+                        value: [[${donutDataNum12}]],
+                        color: "#CDC673"
+                    })
+                }else if(i==13){
+                    donutData.push({
+                        value: [[${donutDataNum13}]],
+                        color: "#3CB371"
+                    })
+                }else if(i==14) {
+                    donutData.push({
+                        value: [[${donutDataNum14}]],
+                        color: "#FFC1C1"
+                    })
+                }
+            }
+
+
+            var myDonut = new Chart(document.getElementById("donut-chart-js").getContext("2d")).Doughnut(donutData);
+        }
+
+
+
+
+        size(true);
+
+    }());
+</script>
+<script>
+    var a=document.getElementById("aa")
+    a.onload=function () {
+        for (var i=0;i<5;i++){
+            <h4>a</h4>
+        }
+    }
+</script>
 </body>
 </html>

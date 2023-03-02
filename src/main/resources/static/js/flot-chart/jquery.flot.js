@@ -2120,12 +2120,13 @@ Licensed under the MIT license.
                     if (axis.direction == "x") {
                         halign = "center";
                         x = plotOffset.left + axis.p2c(tick.v);
-                        if (axis.position == "bottom") {
-                            y = box.top + box.padding;
-                        } else {
-                            y = box.top + box.height - box.padding;
-                            valign = "bottom";
-                        }
+                        // if (axis.position == "bottom") {
+                        //     y = box.top + box.padding;
+                        // } else {
+                        //     y = box.top + box.height - box.padding;
+                        //     valign = "bottom";
+                        // }
+
                     } else {
                         valign = "middle";
                         y = plotOffset.top + axis.p2c(tick.v);
@@ -2135,6 +2136,7 @@ Licensed under the MIT license.
                         } else {
                             x = box.left + box.padding;
                         }
+
                     }
 
                     surface.addText(layer, x, y, tick.label, font, null, null, halign, valign);

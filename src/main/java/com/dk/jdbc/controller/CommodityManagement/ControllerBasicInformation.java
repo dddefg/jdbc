@@ -37,14 +37,12 @@ public class ControllerBasicInformation {
 
     @GetMapping("/ToBasicInformation")
     public String ToBasicInformation(){
-        System.out.println("基础信息");
         return  "Commodity/BasicInformation";
     }
 
     //基础信息添加
     @PostMapping("/addBasicInformation")
     public String addBasicInformation(Model model, com.dk.jdbc.pojo.BasicInformation basicInformation){
-        System.out.println(basicInformation);
         if (basicInformation.getGoodsId() == null || basicInformation.getGoodsId() == " "){
             model.addAttribute("addBasicInformationA","添加失败，商品编号不能为空");
             return  "Commodity/BasicInformation";

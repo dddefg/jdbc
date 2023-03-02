@@ -60,5 +60,30 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
         return goodsMapper.getNum365(date);
     }
 
+    @Override
+    public double sum30Num(QueryGoods queryGoods) {
+        return goodsMapper.sum30Num(queryGoods);
+    }
+
+    @Override
+    public Goods getIssueRankingNum(String goodsName) {
+        return goodsMapper.getIssueRankingNum(goodsName);
+    }
+
+    @Override
+    public List<Goods> sortDayB() {
+        return goodsMapper.sortDayB();
+    }
+
+    @Override
+    public List<Goods> sortMonthB() {
+        return goodsMapper.sortMonthB();
+    }
+
+    @Override
+    public List<Goods> sortYearB() {
+        return goodsMapper.sortYearB();
+    }
+
 
 }

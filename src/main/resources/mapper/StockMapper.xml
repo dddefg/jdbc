@@ -16,6 +16,16 @@
     <select id="getByIdAndName" resultType="com.dk.jdbc.pojo.Stock">
         select * from stock where goods_id=#{goodsId} and goods_name=#{goodsName}
     </select>
+<!--    统计剩余库存总量-->
+    <select id="sumStock" resultType="java.lang.Double">
+        SELECT SUM(num) AS num FROM stock WHERE 1=1
+        <if test="goodsName !='' and goodsName !=null">
+            and goods_name = #{goodsName}
+        </if>
+    </select>
+    <select id="getStockByName" resultType="com.dk.jdbc.pojo.Stock">
+        select * from stock where goods_name = #{goodsName}
+    </select>
 
     <insert id="addStock">
 insert into stock values (#{goodsId},#{goodsName},#{category},#{num},#{unit},#{lastPurchaseDate},#{lastIssueDate})

@@ -28,6 +28,7 @@
         WHERE DATE_SUB(CURDATE(), INTERVAL 10 DAY) <![CDATA[<=]]> date(issue_date)
         GROUP BY issue_date;
     </select>
+<!--    30天内销售额排名-->
     <select id="getIssueRanking" resultType="com.dk.jdbc.pojo.Issue">
         SELECT goods_name,SUM(cost) AS cost
         FROM `issue`
@@ -35,4 +36,105 @@
         GROUP BY goods_name
         ORDER BY cost DESC
     </select>
+    <!--    30天内销售量排名-->
+    <select id="getIssueRankingNum" resultType="com.dk.jdbc.pojo.Issue">
+        SELECT goods_name,SUM(num) AS num
+        FROM `issue`
+        WHERE  DATE_SUB(CURDATE(), INTERVAL 30 DAY) <![CDATA[<=]]> date(issue_date)
+        GROUP BY goods_name
+        ORDER BY num DESC
+    </select>
+    <select id="getListIssue" resultType="com.dk.jdbc.pojo.Issue">
+        select * from issue where 1=1
+        <if test="issueId !='' and issueId !=null">
+            and issue_id = #{issueId}
+        </if>
+        <if test="distributorName !='' and distributorName !=null">
+            and distributor_name = #{distributorName}
+        </if>
+        <if test="goodsName !='' and goodsName !=null">
+            and goods_name = #{goodsName}
+        </if>
+        <if test="category !='' and category !=null">
+            and category = #{category}
+        </if>
+        <if test="issueDate !='' and issueDate !=null">
+            and issue_date = #{issueDate}
+        </if>
+        ORDER BY issue_date DESC
+    </select>
+<!--    //统计本月出库量-->
+    <select id="sum30NumA" resultType="java.lang.Double">
+        SELECT SUM(num) AS num FROM issue WHERE issue_date >= #{date}
+        <if test="goodsName !='' and goodsName !=null">
+            and goods_name = #{goodsName}
+        </if>
+    </select>
+<!--    统计本月各商品类别出库量及其金额 -->
+    <select id="donutData" resultType="com.dk.jdbc.pojo.Issue">
+        SELECT category,SUM(num) AS num,SUM(cost) AS cost FROM issue WHERE issue_date >= #{issueDate} GROUP BY category
+    </select>
+<!--    按类 查询最近七个的销售额-->
+    <select id="getlineData" resultType="com.dk.jdbc.pojo.Issue">
+        SELECT issue_date,sum(`num`) AS num,category
+        FROM issue
+        WHERE DATE_SUB(CURDATE(), INTERVAL 7 DAY) <![CDATA[<=]]> date(issue_date)  AND category = #{category}
+        GROUP BY issue_date,category;
+    </select>
+<!--    一天一天查询统计十天数据-->
+    <select id="graphAreaLineA" resultType="com.dk.jdbc.pojo.Issue">
+        SELECT SUM(num) AS num,issue_date FROM issue
+        WHERE DATE_SUB(CURDATE(), INTERVAL 10 DAY) <![CDATA[<]]> date(issue_date) AND date(issue_date) <![CDATA[<=]]> CURDATE()
+        GROUP BY issue_date
+    </select>
+    <select id="graphAreaLineC" resultType="com.dk.jdbc.pojo.Issue">
+        SELECT goods_name,SUM(num) AS num,issue_date FROM issue
+        WHERE DATE_SUB(CURDATE(), INTERVAL 10 DAY) <![CDATA[<]]> date(issue_date) AND goods_name = #{goodsName}
+        GROUP BY goods_name,issue_date
+    </select>
+
+<!--    查询所有商品每月出库量 id为月份-->
+    <select id="graphAreaLineB" resultType="com.dk.jdbc.pojo.Issue">
+        SELECT SUM(num) AS num,MONTH(issue_date) id FROM issue
+        WHERE DATE_SUB(CURDATE(), INTERVAL 310 DAY) <![CDATA[<]]> date(issue_date)
+        GROUP BY MONTH(issue_date)
+    </select>
+    <select id="graphAreaLineD" resultType="com.dk.jdbc.pojo.Issue">
+        SELECT SUM(num) AS num,MONTH(issue_date) id FROM issue
+        WHERE DATE_SUB(CURDATE(), INTERVAL 310 DAY) <![CDATA[<]]> date(issue_date)  AND goods_name = #{goodsName}
+        GROUP BY MONTH(issue_date)
+    </select>
+<!--    统计本月商品销售量-->
+    <select id="comparisonOfHotGoodsA" resultType="com.dk.jdbc.pojo.Issue">
+        SELECT SUM(num) AS num,goods_name from issue where
+            issue_date>DATE_SUB(CURDATE(), INTERVAL 1 MONTH)
+        GROUP BY goods_name
+        ORDER BY num    </select>
+<!--    统计上个月商品销售量-->
+    <select id="comparisonOfHotGoodsB" resultType="com.dk.jdbc.pojo.Issue">
+        select goods_name,SUM(num) AS num
+        from issue
+        where PERIOD_DIFF(date_format(now(),'%Y%m'),date_format(issue_date,'%Y%m')) = 1
+        GROUP BY goods_name ORDER BY num
+    </select>
+    <select id="sortYear" resultType="com.dk.jdbc.pojo.Issue">
+        SELECT SUM(num) AS num,goods_name
+        FROM issue WHERE  YEAR(issue_date) = YEAR(NOW())
+        GROUP BY goods_name
+        ORDER BY num DESC
+    </select>
+    <select id="sortMonth" resultType="com.dk.jdbc.pojo.Issue">
+        SELECT SUM(num) AS num,goods_name
+        FROM issue
+        WHERE DATE_FORMAT( issue_date, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
+        GROUP BY goods_name
+        ORDER BY num DESC
+    </select>
+    <select id="sortDay" resultType="com.dk.jdbc.pojo.Issue">
+        SELECT SUM(num) AS num,goods_name
+        FROM issue WHERE TO_DAYS(issue_date) =TO_DAYS(now())
+        GROUP BY goods_name
+        ORDER BY num DESC
+    </select>
+
 </mapper>

@@ -1,0 +1,66 @@
+<!-- dkk
+入库查询小页面
+-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+    <script>
+        function delblog(){
+        const ans = confirm("确认要删除？删除之后库存随之减少");
+        if (ans===false) {
+        event.preventDefault(); //取消默认应答
+        return false;
+    }else{
+        alert("正在删除")
+        return true
+    }
+    }
+</script>
+
+<body>
+<table border="1" style="margin: auto;width: 100%" cellspacing="0">
+    <tr>
+        <th colspan="11">退货查询
+        </th>
+    </tr>
+    <tr>
+        <th>供应商名</th>
+        <th>商品编号</th>
+        <th>商品名称</th>
+        <th>商品类别</th>
+        <th>数量</th>
+        <th>单位</th>
+        <th>退货日期</th>
+    </tr>
+
+    <tr th:each="returnA:${returnAll.list}" style="text-align: center">
+        <td th:text="${returnA.supplierName}" ></td>
+        <td th:text="${returnA.goodsId}"></td>
+        <td th:text="${returnA.goodsName}"></td>
+        <td th:text="${returnA.category}"></td>
+        <td th:text="${returnA.num}"></td>
+        <td th:text="${returnA.unit}"></td>
+        <td th:text="${returnA.date}"></td>
+
+    </tr>
+    <td colspan="11">
+        <a th:if="${returnAll.hasPreviousPage}" th:href="@{/returnList?pn=1}">首页</a>
+        <a th:if="${returnAll.hasPreviousPage}" th:href="@{'/returnList?pn='+${returnAll.prePage}}">上一页</a>
+        <span th:each="num: ${returnAll.navigatepageNums}">
+        <a th:if="${returnAll.pageNum == num}" style="color: #FF4400" th:href="@{'/returnList?pn='+${num}}" th:text="'('+${num}+')'"></a>
+        <a th:if="${returnAll.pageNum != num}" th:href="@{'/returnList?pn='+${num}}" th:text="${num}"></a>
+    </span>
+            <a th:if="${returnAll.hasNextPage}" th:href="@{'/returnList?pn='+${returnAll.nextPage}}">下一页</a>
+        <a th:if="${returnAll.hasNextPage}" th:href="@{'/returnList?pn='+${returnAll.pages}}">尾页</a>
+        &nbsp;&nbsp;&nbsp;
+        当前总计[[${returnAll.total}]]条数据
+        &nbsp;&nbsp;&nbsp;
+        <a th:href="@{/downloadExcel}">点击此处导出</a>
+    </td>
+</table>
+</body>
+
+</html>

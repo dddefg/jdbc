@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="ThemeBucket">
+  <title>入库排行榜</title>
+  <link rel="stylesheet" href="js/morris-chart/morris.css">
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/style-responsive.css" rel="stylesheet">
+  <script src="js/html5shiv.js"></script>
+  <script src="js/respond.min.js"></script>
+</head>
+
+<body class="sticky-header">
+
+<section>
+
+    <div class="left-side sticky-left-side">
+
+        <div class="logo">
+            <a href="index.html"><img src="images/logo.png" alt=""></a>
+        </div>
+
+        <div class="logo-icon text-center">
+            <a href="index.html"><img src="images/logo_icon.png" alt=""></a>
+        </div>
+
+        <div class="left-side-inner">
+
+            <ul class="nav nav-pills nav-stacked custom-nav">
+                <li><a href="index.html"><i class="fa fa-home"></i> <span>主页</span></a></li>
+
+                </li>
+                <li class="menu-list"><a href=""><i class="fa fa-tasks"></i> <span>商品管理</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a th:href="@{/ToCommodityManagement}"> 商品入库</a></li>
+                        <li><a th:href="@{/ToGoodsIssue}"> 商品出库</a></li>
+                        <li><a th:href="@{/ToGoodsReturn}"> 商品退货</a></li>
+                        <li><a th:href="@{/ToGoodsLoss}"> 商品损耗报备</a></li>
+                        <li><a th:href="@{/ToBasicInformation}">商品基本信息</a></li>                     </ul>
+                </li>
+                <li class="menu-list nav-active"><a href=""><i class="fa fa-bar-chart-o"></i> <span>入库分析</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a th:href="@{/ToGoodsInStock}"> 商品入库记录</a></li>
+                        <li><a th:href="@{/ToWarehousingAnalysis}"> 入库分析</a></li>
+                        <li><a th:href="@{warehousingRankingList}"> 入库排行榜</a></li>
+                    </ul>
+                </li>
+                <li class="menu-list"><a href="#"><i class="fa fa-th-list"></i> <span>出库分析</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a th:href="@{/toOutboundGoods}">商品出库记录</a></li>
+                        <li><a th:href="@{/toDeliveryAnalysis}">类别分析</a></li>
+                        <li><a th:href="@{toSingleIssue}"> 单品分析</a></li>
+                       <li><a th:href="@{toOutboundRankingList}"> 出库排行榜</a></li>
+                    </ul>
+                </li>
+                <li class="menu-list"><a href=""><i class="fa fa-file-text"></i> <span>其他记录</span></a>
+                    <ul class="sub-menu-list">
+                        <li ><a th:href="@{/toReturnGoods}">退货查询</a></li>
+                        <li ><a th:href="@{/toLossGoods}">损耗报备查询</a></li>
+                    </ul>
+                <li class="menu-list"><a href=""><i class="fa fa-cogs"></i> <span>设置</span></a>
+                    <ul class="sub-menu-list">
+                        <li ><a th:href="@{/toRevisePass}"> 修改密码</a></li>
+                    </ul>
+                </li></li><li><a th:href="@{/loginOut}"><i class="fa fa-sign-in"></i> <span>退出登录</span></a></li>
+
+            </ul>
+
+        </div>
+    </div>
+
+    <div class="main-content" >
+        <div th:replace="common :: #header"></div>
+
+        <div class="page-heading">
+            <h3>
+                入库排行
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">入库分析</a>
+                </li>
+                <li class="active"> 入库排行 </li>
+            </ul>
+        </div>
+
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-sm-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            出库排行榜
+                            <form th:action="@{/warehousingRankingList}" method="post">
+                                查询条件:
+                                <input type="radio" value="day" name="specificDate"  th:checked="${warehousingRankingListText0}"/>日
+                                <input type="radio" value="month" name="specificDate" th:checked="${warehousingRankingListText1}"/>月
+                                <input type="radio" value="year" name="specificDate" th:checked="${warehousingRankingListText2}"/>年
+                                <input type="submit" value="查询">
+                                <a th:if="${warehousingRankingListAll.hasPreviousPage}" th:href="@{/warehousingRankingList?pn=1}">首页</a>
+                                <a th:if="${warehousingRankingListAll.hasPreviousPage}" th:href="@{'/warehousingRankingList?pn='+${warehousingRankingListAll.prePage}}">上一页</a>
+                                <a th:if="${warehousingRankingListAll.hasNextPage}" th:href="@{'/warehousingRankingList?pn='+${warehousingRankingListAll.nextPage}}">下一页</a>
+                                <a th:if="${warehousingRankingListAll.hasNextPage}" th:href="@{'/warehousingRankingList?pn='+${warehousingRankingListAll.pages}}">尾页</a>
+                            </form>
+                        <span class="tools pull-right">
+                            <a href="javascript:;" class="fa fa-chevron-down"></a>
+
+                         </span>
+                        </header>
+                        <div class="panel-body">
+                            <div id="graph-bar"></div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <footer>
+            2023 &copy; 板凳宽宽毕设作品 </a>
+        </footer>
+    </div>
+</section>
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="js/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/modernizr.min.js"></script>
+<script src="js/jquery.nicescroll.js"></script>
+<script src="js/morris-chart/morris.js"></script>
+<script src="js/morris-chart/raphael-min.js"></script>
+<script src="js/morris-chart/morris.init.js"></script>
+<script src="js/scripts.js"></script>
+<script>
+    Morris.Bar({
+        element: 'graph-bar',
+        data: [
+            {x: '[[${warehousingRankingListName0}]]', y: [[${warehousingRankingListNum0}]]},
+            {x: '[[${warehousingRankingListName1}]]', y: [[${warehousingRankingListNum1}]]},
+            {x: '[[${warehousingRankingListName2}]]', y: [[${warehousingRankingListNum2}]]},
+            {x: '[[${warehousingRankingListName3}]]', y: [[${warehousingRankingListNum3}]]},
+            {x: '[[${warehousingRankingListName4}]]', y: [[${warehousingRankingListNum4}]]},
+            {x: '[[${warehousingRankingListName5}]]', y: [[${warehousingRankingListNum5}]]},
+            {x: '[[${warehousingRankingListName6}]]', y: [[${warehousingRankingListNum6}]]},
+            {x: '[[${warehousingRankingListName7}]]', y: [[${warehousingRankingListNum7}]]},
+            {x: '[[${warehousingRankingListName8}]]', y: [[${warehousingRankingListNum8}]]},
+            {x: '[[${warehousingRankingListName9}]]', y: [[${warehousingRankingListNum9}]]},
+            {x: '[[${warehousingRankingListName10}]]', y: [[${warehousingRankingListNum10}]]},
+            {x: '[[${warehousingRankingListName11}]]', y: [[${warehousingRankingListNum11}]]},
+            {x: '[[${warehousingRankingListName12}]]', y: [[${warehousingRankingListNum12}]]},
+            {x: '[[${warehousingRankingListName13}]]', y: [[${warehousingRankingListNum13}]]},
+            {x: '[[${warehousingRankingListName14}]]', y: [[${warehousingRankingListNum14}]]}
+        ],
+        xkey: 'x',
+        ykeys: ['y'],
+        labels: ['入库量'],
+        barColors:['#65CEA7']
+
+
+    });
+
+</script>
+</body>
+</html>

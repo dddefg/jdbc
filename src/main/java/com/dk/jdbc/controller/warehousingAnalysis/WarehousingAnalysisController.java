@@ -2,13 +2,18 @@ package com.dk.jdbc.controller.warehousingAnalysis;
 
 import com.dk.jdbc.controller.UserController;
 import com.dk.jdbc.pojo.Goods;
+import com.dk.jdbc.pojo.Issue;
 import com.dk.jdbc.pojo.QueryGoods;
 import com.dk.jdbc.service.GoodsService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -35,11 +40,15 @@ public class WarehousingAnalysisController {
      */
     @RequestMapping("/ToWarehousingAnalysis")
     public String toWarehousingAnalysis(QueryGoods queryGoods,Model model){
-        String day30 = userController.getDay30();  //名字条件
+         String day30 = userController.getDay30();  //名字条件
         String day = "day";   //按时间查询
         //如果名字为空，则更新名字作为条件
-        if (queryGoods == null || queryGoods.getGoodsName() == null || queryGoods.getGoodsName() == ""){
-            queryGoods.setGoodsName(day30);
+        if (queryGoods ==null || queryGoods.getGoodsName() == null || queryGoods.getGoodsName() == ""){
+            if(day30.equals("无")){
+                queryGoods.setGoodsName("苹果");
+            }else {
+                queryGoods.setGoodsName(day30);
+            }
         }
         //如果时间为空则给一个默认时间
         if (queryGoods == null || queryGoods.getSpecificDate() == null || queryGoods.getSpecificDate() == ""){
@@ -48,6 +57,7 @@ public class WarehousingAnalysisController {
         //查询名字回显示
         model.addAttribute("flotGoodsNameText", queryGoods.getGoodsName());
         //查询时间回显
+
         if (queryGoods.getSpecificDate().equals("day")){
             model.addAttribute("flotGoodsDateText", true);
         }else {
@@ -56,7 +66,7 @@ public class WarehousingAnalysisController {
 
         toWarehousingAnalysisByName(queryGoods.getGoodsName(),queryGoods.getSpecificDate(),model);
         day365(model);
-        return "/warehousingAnalysis/flot";
+        return "warehousingAnalysis/flot";
     }
 
 //出库量及价格趋势图
@@ -66,7 +76,6 @@ public class WarehousingAnalysisController {
         //如果按天统计
         if (date1.equals("day")){
         List<Goods> goodsList = goodsService.WarehousingAnalysisByName(goodsName);
-            System.out.println(goodsList);
         //一天的时间戳
         long tep = 86400000;
 
@@ -82,14 +91,12 @@ public class WarehousingAnalysisController {
             if (goodsList != null){
                 //如果集合的长等于坐标了，停止取值
                 if (goodsList.size() == pointer){
-                    System.out.println("停止1");
                     model.addAttribute("WarehousingAnalysisPrice"+i,0);
                     model.addAttribute("WarehousingAnalysisName"+i,0);
                 }else {
                     Goods goods = goodsList.get(pointer);
                     //如果时间对的上赋值
                     if(format.equals(simpleDateFormat.format(goods.getDate()))){
-                        System.out.println("加入");
                         //当日总价除以数量得出单价
                         model.addAttribute("WarehousingAnalysisPrice"+i,goods.getCost()/ goods.getNum());
                         //当日入库数量
@@ -98,13 +105,11 @@ public class WarehousingAnalysisController {
                         pointer++;
                     }else {
                         //时间对不上赋值为0
-                        System.out.println("停止2");
                         model.addAttribute("WarehousingAnalysisName" + i, 0);
                         model.addAttribute("WarehousingAnalysisPrice"+i,0);
                     }
                 }
             }else {
-                System.out.println("停止3");
                 model.addAttribute("WarehousingAnalysisName"+i,0);
                 model.addAttribute("WarehousingAnalysisPrice"+i,0);
             }
@@ -212,10 +217,8 @@ public class WarehousingAnalysisController {
             //从本周开始遍历
             Goods goods = map.get(i);
             if (goods != null) {
-                System.out.println("WarehousingAnalysisNum"+j+" "+goods.getNum()/tem);
                 model.addAttribute("WarehousingAnalysisNum" + j, goods.getNum()/tem);
             }else {
-                System.out.println("WarehousingAnalysisNum"+j+" "+0);
                 model.addAttribute("WarehousingAnalysisNum" + j, 0);
             }
             if (i==1){
@@ -226,5 +229,62 @@ public class WarehousingAnalysisController {
             }
         }
         }
+
+
+        //入库排行榜
+    @RequestMapping("/warehousingRankingList")
+    public String warehousingRankingList(QueryGoods queryGoods, Model model,
+                                         @RequestParam(value = "pn",defaultValue = "1")Integer pn,//用于表示第几页
+                                         HttpSession session){
+        //如果时间为空则给一个默认时间(月)
+        if (queryGoods == null || queryGoods.getSpecificDate() == null || queryGoods.getSpecificDate() == ""){
+            String b = (String) session.getAttribute("conditionB");
+            if (b != null) {  //不是第一次就根据上一次的访问赋值
+                queryGoods.setSpecificDate(b);
+            }else { //第一次访问赋值月
+                queryGoods.setSpecificDate("month");
+            }
+        }
+
+
+        /**
+         * 设置分页查询
+         */
+        //设置当前页面  ，每页显示多少条
+        PageHelper.startPage(pn, 15 );
+        List<Goods> goodsList = null;
+
+        //回显时间 根据不同要求获取数据
+        if (queryGoods.getSpecificDate().equals("day")){
+            session.setAttribute("conditionB", "day");
+            goodsList = goodsService.sortDayB();  //根据天获取
+            model.addAttribute("warehousingRankingListText0", true);
+        }else if (queryGoods.getSpecificDate().equals("month")){
+            session.setAttribute("conditionB", "month");
+            goodsList = goodsService.sortMonthB();
+            model.addAttribute("warehousingRankingListText1", true);
+        }else {
+            session.setAttribute("conditionB", "year");
+            goodsList = goodsService.sortYearB();
+            model.addAttribute("warehousingRankingListText2", true);
+        }
+        PageInfo<Goods> vegetablesAll = new PageInfo<>(goodsList, 7);
+
+        int j=0;
+        while (j<15){
+            for (Goods goods:goodsList){
+                model.addAttribute("warehousingRankingListName"+j, goods.getGoodsName());
+                model.addAttribute("warehousingRankingListNum"+j, goods.getNum());
+                j++;
+            }
+            while (j<15){
+                model.addAttribute("warehousingRankingListName"+j, "暂无");
+                model.addAttribute("warehousingRankingListNum"+j, 0);
+                j++;
+            }
+        }
+        model.addAttribute("warehousingRankingListAll", vegetablesAll);
+        return "warehousingAnalysis/warehousingRankingList";
+    }
     }
 

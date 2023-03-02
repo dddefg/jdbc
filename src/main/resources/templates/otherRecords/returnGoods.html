@@ -1,32 +1,31 @@
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+return of goods<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"></html>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <meta name="description" content="">
   <meta name="author" content="ThemeBucket">
-  <title>基础信息管理</title>
+
+
+  <title>商品退货记录</title>
+
+  <link href="js/dropzone/css/dropzone.css" rel="stylesheet"/>
 
   <link href="css/style.css" rel="stylesheet">
   <link href="css/style-responsive.css" rel="stylesheet">
 
-
   <script src="js/html5shiv.js"></script>
   <script src="js/respond.min.js"></script>
+
 </head>
-<style>
-    .inputGoods{
-        width: 30%;
-        height: 40px;
-        float: left;
-        margin-left:15px;
-    }
-</style>
+
 <body class="sticky-header">
 
 <section>
 
     <div class="left-side sticky-left-side">
+
         <div class="logo">
             <a href="index.html"><img src="images/logo1.png" alt=""></a>
         </div>
@@ -34,32 +33,48 @@
         <div class="logo-icon text-center">
             <a href="index.html"><img src="images/logo_icon.png" alt=""></a>
         </div>
+
         <div class="left-side-inner">
+
             <ul class="nav nav-pills nav-stacked custom-nav">
                 <li><a href="index.html"><i class="fa fa-home"></i> <span>主页</span></a></li>
-                <li class="menu-list nav-active"><a href=""><i class="fa fa-tasks"></i> <span>商品管理</span></a>
+
+
+
+
+
+
+
+
+                <li class="menu-list"><a href=""><i class="fa fa-tasks"></i> <span>商品管理</span></a>
                     <ul class="sub-menu-list">
                         <li><a th:href="@{/ToCommodityManagement}"> 商品入库</a></li>
                         <li><a th:href="@{/ToGoodsIssue}"> 商品出库</a></li>
                         <li><a th:href="@{/ToGoodsReturn}"> 商品退货</a></li>
                         <li><a th:href="@{/ToGoodsLoss}"> 商品损耗报备</a></li>
-                        <li><a th:href="@{/ToBasicInformation}">商品基本信息</a></li>                     </ul>
+                        <li><a th:href="@{/ToBasicInformation}">商品基本信息</a></li>
+                    </ul>
                 </li>
                                <li class="menu-list"><a href=""><i class="fa fa-bar-chart-o"></i> <span>入库分析</span></a>
                     <ul class="sub-menu-list">
                         <li><a th:href="@{/ToGoodsInStock}"> 商品入库记录</a></li>
                         <li><a th:href="@{/ToWarehousingAnalysis}"> 入库分析</a></li>
-                        <li><a th:href="@{warehousingRankingList}"> 入库排行榜</a></li>
+                       <li><a th:href="@{warehousingRankingList}"> 入库排行榜</a></li>
+
                     </ul>
                 </li>
                 <li class="menu-list"><a href="#"><i class="fa fa-th-list"></i> <span>出库分析</span></a>
                     <ul class="sub-menu-list">
                         <li><a th:href="@{/toOutboundGoods}">商品出库记录</a></li>
-                        <li><a th:href="@{/toDeliveryAnalysis}">类别分析</a></li>                        <li><a th:href="@{toSingleIssue}"> 单品分析</a></li>
+                        <li><a th:href="@{/toDeliveryAnalysis}">类别分析</a></li>
+                        <li><a th:href="@{toSingleIssue}"> 单品分析</a></li>
                         <li><a th:href="@{toOutboundRankingList}"> 出库排行榜</a></li>
                     </ul>
                 </li>
-                <li class="menu-list"><a href=""><i class="fa fa-file-text"></i> <span>其他记录</span></a>
+
+
+
+                <li class="menu-list   nav-active"><a href=""><i class="fa fa-file-text"></i> <span>其他记录</span></a>
                     <ul class="sub-menu-list">
                         <li ><a th:href="@{/toReturnGoods}">退货查询</a></li>
                         <li ><a th:href="@{/toLossGoods}">损耗报备查询</a></li>
@@ -69,90 +84,71 @@
                         <li ><a th:href="@{/toRevisePass}"> 修改密码</a></li>
                     </ul>
                 </li></li><li><a th:href="@{/loginOut}"><i class="fa fa-sign-in"></i> <span>退出登录</span></a></li>
+
             </ul>
+
         </div>
     </div>
+
     <div class="main-content" >
+
         <div th:replace="common :: #header"></div>
+        <!-- page heading start-->
         <div class="page-heading">
             <h3>
-                基础信息
+                商品退货记录
             </h3>
             <ul class="breadcrumb">
                 <li>
-                    <a href="#">商品管理</a>
+                    <a href="#">其他记录</a>
                 </li>
-                <li class="active"> 基础信息 </li>
+                <li class="active">商品退货记录</li>
             </ul>
         </div>
         <!-- page heading end-->
 
-        <!--基础信息管理-->
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 基础信息管理栏
-        <div  class="wrapper" style="height: 200px">
-            <section class="panel">
-                <header class="panel-heading">
-                    添加基础信息
-                    <label style="color: red" th:text="${addBasicInformationA}"></label>
-                    <span class="tools pull-right">
-<!--                        收缩-->
-                        <a class="fa fa-chevron-down" href="javascript:;"></a>
-                     </span>
-                </header>
-                <div class="panel-body">
-                    <form class="cmxform form-horizontal adminex-form" method="post" action="" th:action="@{/addBasicInformation}">
-                        <div class="form-group ">
-                            <div>
-                                <div class="inputGoods">
-                                    商品编号：
-                                    <input type="text" name="goodsId" style="height:30px;width: 300px">
-                                </div>
-                                <div class="inputGoods"> 商品名称：
-                                    <input type="text" name="goodsName" style="height:30px;width: 300px"></div>
-                                <div class="inputGoods"> 商品类别：
-                                    <input type="text" name="category" style="height:30px;width: 300px"> </div>
-                            </div>
 
-                        </div>
-                        <div class="form-group ">
-                            <div style=" text-align: center">
-                                <button  class="btn btn-primary" type="submit" >保存</button>
-                                <button class="btn btn-default" type="reset" >取消</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </section>
-        </div>
 
-        <!--基础信息展示-->
+        <!--入库展示-->
         <div  class="wrapper" style="height: 800px">
             <section class="panel">
                 <header class="panel-heading">
-                    基础信息查询
+                    退货查询
                     <span class="tools pull-right">
 <!--                        收缩-->
                         <a class="fa fa-chevron-down" href="javascript:;"></a>
                      </span>
                 </header>
+<!--                引用其他页面-->
                 <div class="panel-body">
-                    <iframe th:src="InformationTable"  style="margin: auto" width="100%" height= "350px" name="topFrame"   scrolling="No" noresize="noresize" frameborder="0" id="topFrame"></iframe>
+                    <iframe th:src="returnList"  style="margin: auto" width="100%" height= "600px" name="topFrame"   scrolling="No" noresize="noresize" frameborder="0" id="topFrame"></iframe>
                 </div>
             </section>
-            <footer class="sticky-footer">
-                2023 &copy; 板凳宽宽毕设作品 </a>
-            </footer>
-        </div>
+
+
+
+        <!--footer section start-->
+        <footer class="sticky-footer">
+            2023 &copy; 板凳宽宽毕设作品 </a>
+        </footer>
+
+    </div>
+    </div>
 
 </section>
+
 <script src="js/jquery-1.10.2.min.js"></script>
 <script src="js/jquery-ui-1.9.2.custom.min.js"></script>
 <script src="js/jquery-migrate-1.2.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/modernizr.min.js"></script>
 <script src="js/jquery.nicescroll.js"></script>
-<script type="text/javascript" src="js/jquery.validate.min.js"></script>
-<script src="js/validation-init.js"></script>
+
+<!--dropzone-->
+<script src="js/dropzone/dropzone.js"></script>
+
+
 <script src="js/scripts.js"></script>
+
 </body>
 </html>
